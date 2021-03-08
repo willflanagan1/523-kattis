@@ -9,5 +9,5 @@
   5. 'git checkout origin/master -ft'
 
   #### create your branch
-  1. git checkout -b <yourname>-branch
-  2. git branch --set-upstream origin <yourname>-branch
+  1. git checkout -b "yourname"-branch
+  2. git branch --set-upstream origin "yourname"-branch
