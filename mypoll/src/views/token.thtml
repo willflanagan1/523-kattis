@@ -1,0 +1,3 @@
+<h1>Token for {{user}}</h1>
+<pre>{{user}}|{{token}}</pre>
+% rebase('assessment.base')

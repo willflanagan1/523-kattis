@@ -1,0 +1,11 @@
+    <nav>
+      <ul>
+        <li><a href="{{get_url('root')}}">Home</a></li>
+        <li><a href="{{get_url('grades')}}" target="_blank">Grades</a></li>
+        <li><a href="{{get_url('view')}}" target="_blank">View submissions</a></li>
+        <li><a href="{{get_url('feedback')}}" target="_blank">View feedback</a></li>
+        <% if user_is_admin(get_user()): %>
+           <li><a href="{{get_url('la', page_name='home')}}" target="_blank">LA info</a></li>
+        <% end %>
+      </ul>
+    </nav>

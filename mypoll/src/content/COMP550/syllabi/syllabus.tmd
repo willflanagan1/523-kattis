@@ -1,0 +1,393 @@
+# Syllabus
+
+<img src="{{LOGO}}" style="float:right; width:30%; right:0;"/>
+## {{!linkable_header('Catalog Description')}}
+
+**COMP 550. Algorithms and Analysis.** 3 Credits.  
+
+Welcome to COMP 550 where we will learn about
+formal specification and verification of programs,
+several techniques of algorithm analysis, and 
+examine some problem-solving paradigms.  
+
+Lastly we will survey of selected algorithms.  
+
+This class will be different from most of undergraduate
+computer science classes.
+COMP 550 requires more mathematical analysis and 
+less programming than most computer science classes.
+
+## {{!linkable_header('General Course Info')}}
+
+Term: Spring 2021  
+Course Number: COMP 550  
+Section 001 T/TH  9:30 AM - 10:45 AM  
+Section 002 T/TH 11:00 AM - 12:15 PM  
+Recitation W 3:35 PM - 4:50 PM Both sections  
+
+## {{!linkable_header('Instructor Info')}}
+
+Name: John Majikes  
+Office: Working remotely.  
+Email: [jmajikes@cs.unc.edu](mailto: jmajikes@cs.unc.edu)  
+Phone: 919-590-6093  
+
+See the [help page]({{get_url('syllabi', page_name='help')}}) for more information on the instructor and assistants office hours.
+
+## {{!linkable_header('Textbook, Class discussion site, Required browser, Course Care')}}
+
+_[Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-third-edition)_,
+Third edition by Corman, Leiserson, Riverst, and Stein.
+
+We will use [Piazza](https://piazza.com/unc/spring2021/comp550) for questions and announcements.
+You will need to sign up and check it regularly.
+Please read the [section on Piazza](#piazza) as it may be helpful and there are bonus points for Piazza.
+
+We will use web-based, Chrome, software in class.
+Using Safari or other web-based browsers have been shown to have incompatibilities.
+
+Lastly, you will want to sign up for [Course Care](https://course.care).
+The steps for this are described on the [help page office hours]({{get_url('syllabi', page_name='help')}}.
+
+---
+
+## {{!linkable_header('Course learning objectives')}}
+
+In this course you will discuss, analyze, and evaluate a variety of algorithms.
+You will learn standard computer science notation and evaluation techniques to classify the algorithm's resource requirements (processor time and/or memory).
+Lastly, you will evaluate the algorithm's resource requirements as the amount of data increases.
+The evaluation will
+determine the asymptotic growth of resources of different algorithms,
+compare and contrast alternative algorithms, and
+justify the choice of an algorithm for a given purpose.
+
+Modular learning objectives:
+<ul>
+ <!-- Chapter 1-3 Homework 1 -->
+ <li>Classify the asymptotic growth of algorithm resources (time or memory) as the amount of input data increases, the standard notation of the asymptotic growth, and the analysis of the standard notation.
+    <!--
+     Given a standard summation notation, show the numeric value of in terms of the variable n
+     Given a standard summation notation and its resulting numeric value, show the base case and the induction step of the induction proof of the resulting numeric value
+     Given a small (<15 line program), determine the number of times a loop is executed for a given value of n
+     Given a logarithmic expression, use the identity rules to express the expression in a more concise manner
+     -->
+ </li>
+
+ <!-- Chapter 4 Homework 2 -->
+ <li> Recognize what a recurrence relation is, what types of algorithms it describes, and what is the process to solve them.</li>
+ <!-- Nice youtube on recurrence https://www.youtube.com/watch?v=l0iXqhqfDPo -->
+
+ <li> Solve recurrence relations; analyze different recurrence equations; and evaluate the elements of recurrence relevant to a particular algorithm.  </li>
+ <!--
+   Describe where recurrence relations are commonly used, which algorithm design paradigm it applies to, and the three common techniques to solve them.
+   Solve linear recurrence relations using a substitution (guess) method for solving recurrences, be able to use an induction proof to confirm your solution.
+   Use the recursion-tree method to solve a recurrence relation, analyze when a recursion-tree is more applicable than the substitution method.
+   Apply the master method for solving recurrences, understand the four cases of the method and how they apply.
+   Using the three solution techniques, analyze the distinct parts of an algorithm, be ready to apply that analysis to the evaluation of algorithms and how they were created.
+   -->
+
+ <!-- Midterm 1 -->
+
+ <!-- Chapter 16 -->
+ <li> Identify problems solvable with a greedy algorithm, design and prove the correctness of such an algorithm, and supply asymptotic running time for a variety of greedy algorithms.  </li>
+
+ <li> Recognize problems to which divide and conquer or dynamic programming approaches may apply, design algorithms with these approaches, and analyze their computational efficiency.  </li>
+
+ <li> Understand, explain and use algorithms.  Some examples that _may_ be used in class are: 
+  <ul>
+   <li> Prim's and Kruskal's algorithms for finding minimum spanning trees.</li>
+   <li> Linear Programming to optimize a solution given constraints     </li>
+   <li> Longest Common Sequences and its use in bioinformatics     </li>
+ </ul></li>
+
+</ul>
+
+## {{!linkable_header('Target Audience')}}
+
+Computer science undergraduate majors.
+
+## {{!linkable_header('Prerequisites')}}
+
+COMP [210](https://catalog.unc.edu/search/?P=COMP%20210),
+[211](https://catalog.unc.edu/search/?P=COMP%20211),
+and [301](https://catalog.unc.edu/search/?P=COMP%20301); or 410; 
+a grade of C or better is required in all prerequisite courses.
+
+---
+
+## {{!linkable_header('Course Assignments')}}
+
+### {{!linkable_header('Worksheets')}}
+
+Worksheets are a way to reward coming to class and coming to class prepared.
+Many worksheets will be done in breakout groups.
+For any worksheet submitted on-time, scores of 75% or better will receive a score of 100%.
+For any worksheet submitted before the grader is run, the minimum grade is 50%.
+
+Since these are in-class worksheets, handing them in on time does require attendance.
+Late assignments will be penalized 2% of the maximum score per hour or portion of an hour that they are late.
+The minimum grade for worksheets submitted is 50%.
+The grader will be run $\approx 1$ day after the worksheet is due.
+Once the grader is run and answers are generally available, no late submissions will be accepted.
+
+As this is a computer grading system, it is somewhat difficult to _unsubmit_ a worksheet or any assignment.
+You will be given grace on any two assignments that you want to resubmit.
+But you should consider that only the first submission of a homework or any assignment will be graded.
+
+Lastly, there are [worksheet bonuses](#worksheet-bonus) and
+the value of worksheets makes the final grade go to 102% (see [grading criteria](#grading-criteria)).
+Therefore I hope you see worksheets as a low-stakes bonus for coming to class prepared.
+
+### {{!linkable_header('Homework assignments')}}
+
+You will have five homework assignments that allow you to demonstrate knowledge of the material.
+Deadlines are difficult,
+but you will have the ability to start on portions of the homework as soon as the 
+subjects are presented in class.
+The final portion of a homework assignment generally has five days before the submission deadline.
+
+Unfortunately, the flexible start of homeworks cannot be applied to late submission deadlines.
+If you have some emergency that is totally out of your control, 
+please contact me as soon as possible because once the grader is run and answers are generally available, no late submissions will be accepted.
+Late assignments will be penalized 2% of the maximum score per hour or portion of an hour that they are late.
+The maximum late penalty is 50%.
+
+As this is a computer grading system, it is somewhat difficult to _unsubmit_ a homework or any assignment.
+You will be given grace on any two assignments that you want to resubmit.
+But you should consider that only the first submission of a homework or any assignment will be graded.
+
+### {{!linkable_header('Exams')}}
+
+The largest portion of your grade will be the two midterms and final exam.
+In order to show eventual mastery of the material,
+these three exams are cumulative
+and there is a [midterm boost](#midterm-boost) if your scores improve.
+See [Key Dates](#key-dates), [midterm boost](#midterm-boost), and [Grading Criteria](#grading-criteria) for more information.
+
+As this is a computer grading system, it is somewhat difficult to _unsubmit_ an exam or any assignment.
+You will be given grace on any two assignments that you want to resubmit.
+But you should consider that only the first submission of a homework or any assignment will be graded.
+
+## {{!linkable_header('Key Dates')}}
+
+First day of classes Tuesday, 19 January  
+Midterm Wednesday, 24 February  
+Midterm Wednesday, 31 March   
+Last day of classes 5 May  
+Final Exam 7-14 May
+
+## {{!linkable_header('Grading Criteria')}}
+
+Worksheets &nbsp;7%  
+Homework 20%  
+Midterm 1 &nbsp;20%  
+Midterm 2 &nbsp;25%  
+<u>Final Exam 30%</u>  
+Total &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;102%
+
+There will be **no makeup exams**.
+If you miss a midterm with a Dean's excuse,
+the weight of the next midterm or final exam will simply be
+increased by the weight of the missed midterm.
+
+The course final is given in compliance with UNC final exam regulations and
+according to the UNC Final Exam calendar.
+
+## {{!linkable_header('Grading Feedback')}}
+
+You will get instant feedback on the correctness of your most of your answers.
+The Chrome browser will change input boxes' <font color="green">green</font> to indicate correctness.
+<font color="green">Green</font> highlight should just assist you.
+During an exam, if you believe your answer is correct and the input box did not turn <font color="green">green</font>,
+continue on.
+On homeworks or worksheets, if you believe your answer is correct and the input box did not turn <font color="green">green</font>,
+go to [office hours]({{get_url('syllabi', page_name='help')}}).
+
+Not that single, HTML-select pull-downs are simply multiple choice questions.
+There is no instant feedback on multiple choice questions.
+
+My computer and I will do all grading.
+The teaching assistants sole function is helping you learn. 
+So please don't complain to them if you have a problem with the grade.
+Bring all grading issues to me.
+Final feedback will be available on the [feedback page]({{get_url('feedback')}}),
+and correct answers will be available on the [feedback page]({{get_url('feedback')}}).
+No partial credit will be given on homeworks and worksheets.
+No late assignments will be accepted after grading/answers are generally available.
+
+All scores on worksheets, homeworks, and exams will be normalized and then averaged using the weights above.
+Numeric totals will be translated to letter grades with the following ranges.
+Note that 94.999 is less than 95; don't assume anything will be rounded.
+Worksheets, not grade grubbing,
+should be used to improve your grades.
+
+<style>pre,code { background-color: white; font-size: 1em; }</style>
+```text
+90  ≤ A- < 95    95  ≤ A  ≤ 100
+80  ≤ B- < 83⅓   83⅓ ≤ B  < 86⅔  86⅔ ≤ B+ < 90
+70  ≤ C- < 73⅓   73⅓ ≤ C  < 76⅔  76⅔ ≤ C+ < 80
+                 60  ≤ D  < 65   65  ≤ D+ < 70
+                       F  < 60
+```
+
+---
+
+### {{!linkable_header('Extra credit')}}
+
+#### {{!linkable_header('Worksheet bonus')}}
+For insightful raised hand / answered question in class or 
+for each insightful [Piazza post marked as a good notes](#piazza),
+a worksheet bonus of 5% will be added to the lowest, non-dropped worksheet score. 
+An email confirmation will be sent of each worksheet bonus given and the bonus will be reflected on the [grades page]({{get_url('grades')}}).
+Please see [section Piazza](#piazza) for more information on what is a good [Piazza](https://piazza.com/unc/spring2021/comp550) post.
+
+Note that although bonuses for good [Piazza](https://piazza.com/unc/spring2021/comp550) posts are for correct, helpful posts, bonuses for answering questions in class does not have to be for a correct answer. The bonus is given when the instructor feels an honest attempt was made to answer the question, participate in class, or help other students on [Piazza](https://piazza.com/unc/spring2021/comp550).
+
+If you feel you should have received a bonus, please bring it to the instructor's or assistants' attention as soon as possible.
+Realize that there are approximately 200 students, so please notify me within one week from when the bonus should have been received to email me.
+
+Lastly, the instructors will do their best to round-robin who gets called on in class. But understand there are hundreds of students and this is a best attempt.
+
+Bonuses are meant to encourage and reward participation in class and [Piazza](https://piazza.com/unc/spring2021/comp550).
+
+#### {{!linkable_header('Midterm boost')}}
+
+In an effort to reward improvement, 
+if the score increases from the first midterm to the second, 
+a boost of 25% of the difference will be added to your first midterm score.
+A similar boost of 25% of the difference between the second midterm and the final exam
+will be added to your second midterm score.
+
+For example, if you score 70% on the first midterm and 90% on the second midterm,
+25% of the 20 point difference will be added to your first midterm score; 
+your first midterm score increase by 5 points.
+The boost will be reflected on the [grades page]({{get_url('grades')}}).
+
+---
+
+## {{!linkable_header("Piazza")}}
+
+Piazza is a great place to have a discussion about a subject from class.
+Here are some tips to create good piazza posts.
+You may want to watch [this cute video](https://youtu.be/tVqWcrMPxfY) on why it's good to post well.
+
+ - Why?  To teach one another
+ - Post early
+ - Read others posts before making your own
+ - Write clearly and concisely
+ - Refer to others posts.  Use a URL hyperlink where possible.
+ - Explain why.  Don't just state something that you believe is obvious.
+ - Be respectful.  Say what you mean without being mean!
+
+---
+
+## {{!linkable_header('How to succeed in this course')}}
+
+Regardless of your definition of success,
+I hope you succeed in this course.
+Whether success means a good grade or being prepared for that job interview question,
+I have found that there are three things that increase the chances of success in the class.
+
+1. Come to class prepared:  
+You should have completed the reading assignments from the [agenda]({{get_url('root')}}#agenda)
+before coming to class.
+This does not mean to read for complete understanding.
+It does mean to read to understand the high level concepts.
+Coming to class knowing what you don't know is an advantage.
+You will able ask intelligent questions.
+
+2. Don't fall behind:
+After reading CLRS and covering a subject in class, if you don't understand the material,
+get help at [office hours]({{get_url('syllabi', page_name='help')}}) early.
+There are much shorter lines and their will be more time to discuss things more thoroughly.
+Waiting until just before the midterm to get help is just problematic.
+
+3. Be formal and precise:  
+Read questions, answer questions, and check your work;
+you need to do all three.
+Please embrace the mathematical notation.
+Be precise with your answers.
+
+
+Please visit the [reading assignments page]({{get_url('syllabi', page_name='reading')}}) soon.
+
+
+## {{!linkable_header('Course Policies and Honor Code')}}
+
+Before my course policy, this is my life policy:
+I assume my mother's watching me.
+Whether that's in the classroom, at the meeting, in the discussion, or at the grocery store.
+How would my mother perceive my behavior?
+Therefore when you argue a point, ask a question, or whatever, just assume that someone you love and respect is listening to you.
+You want them to be proud and not embarrassed by your behavior.
+Please call me out when you perceive I have strayed from this policy.
+My mother will appreciate it as I fail often and she needs the help!
+
+For this class, my policy is Be Prepared.
+(See [How to succeed in this course](#how-to-succeed-in-this-course) for more information.)
+Because, as a practical matter, we can't always be prepared, when you aren't prepared just own it.
+Ask for help as soon as you start to fall behind.
+Then catch up, regroup, and come prepared the next time.
+
+As in life, collaboration is encouraged on homeworks.
+Of course, whatever you hand in must be your own writing/typing.
+Since midterms and the final exam will test whether you understand the homework assignments,
+no collaboration of any kind is allowed.
+So you violate the honor code and do yourself a disservice if you just copy the answers on homeworks, the midterms, or exams.
+
+Good scholarship requires that resources and collaboration be acknowledged.
+Thus, if you collaborate on the solution of a problem set, I expect that you list your collaborators at the bottom of the page.
+Collaboration on midterms and the final exam,
+copying answers on the midterms and the final,
+or any outside help on the midterms and the final
+are a violation of the [Honor Code](https://catalog.unc.edu/policies-procedures/honor-code).
+
+
+All exams will be, **closed-book**, using the Google Chrome web browser.
+You may **NOT** use your book but
+may use written notes or printed/handwritten _cheat sheets_.
+You must not access anything else on your computer during the
+exam.
+
+**Honor code violations will be prosecuted.**
+
+
+## {{!linkable_header('Accommodations, Resources, and Services')}}
+
+Academic accommodations and associated resources and services
+are designed to provide equal access to courses and programs.
+Accommodations are evaluated and granted individually based on
+the functional limitations  specified in the documentation
+submitted by the students.
+
+For more information see the [Accessibility Resources and Service website](https://ars.unc.edu/accommodations).
+
+## {{!linkable_header('Counseling and Psychological Services')}}
+
+Counseling and Psychological Services offers individual counseling,
+couples therapy, group educational and therapeutic sessions,
+as well as psychiatric services.
+At **CAPS**, you'll find concern, empathy, acceptance and support for whatever issue you may be facing.
+
+For more information, see the [Counseling and Psychological Services website](https://studentaffairs.unc.edu/about-us/departments/counseling-and-psychological-services).
+
+## {{!linkable_header('Title IX Resources')}}
+
+Any student who is impacted by discrimination, harassment, interpersonal
+relationship violence, sexual violence, sexual exploitation, or stalking is
+encouraged to [seek resources on campus or in the community](https://eoc.unc.edu/resources-for-preventing-and-responding-to-sexual-or-interpersonal-violence/).
+Please contact any of the following to discuss your specific needs:
+
+- Director of Title IX Compliance (Adrienne Allison – [Adrienne.allison@unc.edu](mailto:Adrienne.allison@unc.edu))
+- Report and Response Coordinators in the [Equal Opportunity and Compliance Office](https://eoc.unc.edu/) contact:
+[reportandresponse@unc.edu](mailto: reportandresponse@unc.edu) 919-445-2759
+- Counseling and Psychological Services [caps.unc.edu](https://caps.unc.edu) (confidential)
+- Gender Violence Services Coordinators [gvsc@unc.edu](mailto: gvsc@unc.edu) (confidential) 
+
+Additional resources are
+available at [safe.unc.edu](http://safe.unc.edu).
+
+## {{!linkable_header('Disclaimer')}}
+
+The professor reserves to right to make changes to the syllabus, including
+dates. These changes will be announced as early as possible.

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{static('css/mypoll.css')}}">
+    <link rel="stylesheet" href="{{static('katex/katex.min.css')}}">
+    <script defer src="{{static('katex/katex.min.js')}}"></script>
+    <script src="{{static('js/static.js')}}"></script>
+    <style>
+ul li.unchecked {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 0px 0px 40px;
+  background: #eee;
+  list-style-type: "\2610";
+
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Set all odd list itmes to a different color (zebra-stripes) */
+ul li.unchecked:nth-child(odd) {
+   background: #f9f9f9;
+}
+ul li.unchecked:hover {
+   background: #ddd;
+}
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  list-style-type: none;
+  text-decoration: line-through;
+}
+table {
+  border-collapse: collapse;
+}
+table tbody tr:nth-child(odd) {
+  background-color: #ddd;
+}
+
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #000000;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+</style>
+  </head>
+  <body data-root="{{get_url('root')}}">
+    % include('nav', admin=admin)
+    <section id="content" class="body">
+      <span id="user"><a href="/login">{{get_user()}}</a></span>
+      <div id="pagebody" class="entry-content">
+        {{!base}}
+      </div>
+    </section>
+ </body>
+</html>

@@ -1,0 +1,1 @@
+<p>Time elapsed: <input id="elapsed" type="text" readonly name="_elapsed"/>

@@ -1,0 +1,64 @@
+<head>
+    <meta charset="utf-8">
+    <title>Kruskal Image</title>
+    <script type="module">
+"use strict";
+(() => {
+    // attempt to detect errors during loading the page to warn
+    // students they need to refresh to try again.
+    //
+    // I need to do this part early in the page load to make sure
+    // everything gets caught
+    //
+    // accumulate the errors
+    const errors = [];
+    window.addEventListener('error', (e) => {
+        errors.push(e);
+    }, true);
+    window.addEventListener('load', () => {
+        const loading = document.getElementById('loading');
+        if (!loading) {
+            // how can this happen?
+            return;
+        }
+        if (errors.length > 0) {
+            loading.innerHTML = 'Loading failed, refresh the page';
+            for (const e of errors) {
+                const p = document.createElement('p');
+                if (e.message) {
+                    p.innerHTML = e.message;
+                }
+                else {
+                    const t = e.target;
+                    let url;
+                    if (t instanceof HTMLLinkElement) {
+                        url = t.href; // css
+                    }
+                    else if (t instanceof HTMLScriptElement) {
+                        url = t.src; // scripts
+                    }
+                    else {
+                        url = 'something'; // not sure this can happen
+                    }
+                    const msg = `${t.tagName}: ${url} failed to load`;
+                    p.innerHTML = msg;
+                }
+                loading.appendChild(p);
+            }
+        }
+        else {
+            loading.style.display = 'none';
+            const pagebody = document.getElementById('pagebody');
+            if (pagebody) {
+                pagebody.style.display = 'block';
+            }
+        }
+    });
+})();
+//# sourceMappingURL=monitorloading.js.map    </script>
+    <link rel="stylesheet" href="/static/css/mypoll.css?5f2c959e">
+    <script src="/static/js/bundle.js?5f873f0c"></script>
+   <script type="text/javascript">(function(){var s=document.createElement("script");var port=(window.location.port || (window.location.protocol == 'https:' ? 443: 80));s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="//localhost:8081/livereload.js?port=8081"></script></head>
+<body>
+  <img src="https://comp550fa20.cs.unc.edu/mypoll/static/images/M2-Kruskal-5.png">
+</body>

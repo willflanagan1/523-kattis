@@ -1,0 +1,6 @@
+% time = f.time.strftime('%Y/%m/%d %H:%M:%S')
+<dt><b><a href="{{get_url('viewKey', key=f.key, user=user)}}">{{f.key}}</a></b> {{time}} {{f.id}}</dt>
+<dd>{{!'score: %.1f<br/>' % f.score if f.score is not None else ''}}
+  {{!'points total: %.1f<br/>' % f.points_total if f.points_total is not None else ''}}
+  answers: <a href="{{get_url('rubric', key=f.key)}}">{{f.key}}</a></br>
+  {{f.msg}}</dd>

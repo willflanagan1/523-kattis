@@ -1,0 +1,17 @@
+    <nav>
+      <ul>
+        <li><a href="{{get_url('root')}}">Home</a></li>
+        <li><a href="{{get_url('syllabus')}}">Syllabus</a></li>
+        <li><a href="{{get_url('calendar')}}">Calendar</a></li>
+        <li><a href="{{get_url('zoom', video='lecture')}}" target="_bank">Zoom Lecture</a></li>
+        <li><a href="{{get_url('view')}}" target="_blank">View submissions</a></li>
+        <li><a href="{{get_url('feedback')}}" target="_blank">View feedback</a></li>
+        <% if user_is_admin(get_user()): %>
+          <li><a href="{{get_url('roll')}}" target="_blank">Roster</a></li>
+          <li><a href="{{get_url('assessments')}}" target="_blank">All assessments</a></li>
+          <li><a href="{{get_url('submittable')}}" target="_blank">Submittable assessments</a></li>
+          <li><a href="{{get_url('notes')}}" target="_blank">Notes data entry</a></li>
+        <% end %>
+        <li><a href="{{get_url('logout')}}" target="_blank">Logout</a></li>
+      </ul>
+    </nav>

@@ -1,0 +1,18 @@
+<ol id="polllist">
+  <% for poll in allpolls: %>
+    <li>
+      <input type="radio" name="active" value="{{poll['key']}}"
+        {{'checked' if poll['key'] == active else ''}} />
+      <a href="{{get_url('poll') + 's/' + poll['key']}}">{{poll['text']}}</a>
+    </li>
+  <% end %>
+</ol>
+<script>
+document.getElementById('polllist').addEventListener('change', () => {
+  const key = document.querySelector('input[name=active]:checked').value;
+  const fd = new FormData();
+  fd.append('key', key);
+  fetch("{{get_url('activate')}}", {method: 'post', body: fd});
+});
+</script>
+% rebase('assessment.base')

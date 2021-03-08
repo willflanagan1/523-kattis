@@ -1,0 +1,11 @@
+<fieldset class="mips" data-checks="{{checks}}">
+  <% if defined('context') and context: %>
+  <pre class="context">
+	# setup for your code
+{{!context.rstrip()}}</pre>
+  <% end %>
+  <textarea name="{{name}}" autocomplete="nope" spellcheck="false"></textarea>
+  <button type="button">Check</button>
+  <% include('points') %>
+  <div class="mipsoutput"></div>
+</fieldset>

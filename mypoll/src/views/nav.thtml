@@ -1,0 +1,5 @@
+    <nav>
+      <ul>
+        <li><a href="{{get_url('root')}}">Home</a></li>
+      </ul>
+    </nav>

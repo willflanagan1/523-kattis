@@ -1,0 +1,4 @@
+<input class="evaluate" type="text" name="{{name}}"
+% include('attrs')
+  placeholder="Enter an expression"/><span class="evalmessage"></span>
+% include('points')

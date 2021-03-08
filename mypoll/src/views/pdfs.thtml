@@ -1,0 +1,12 @@
+<h1>PDFs</h1>
+<dl class="feedback">
+  PDF Copies of Lectures for COMP 550
+<br></br>
+<table>
+  <tr><th>Title</th></tr>
+     <% for pdf in pdfs: %>
+        <tr><td><a href="{{pdf['url']}}" target="_blank">{{pdf['title']}}</td></tr>
+     <% end %>
+</table>
+</dl>
+% rebase('assessment.base')

@@ -1,0 +1,83 @@
+<div class='timeline'>
+{{week}} {{title}}
+  % if defined('readings') and (len(readings)>0): 
+    <div class='timeline_item'>
+    % if len(readings) == 1:
+        Reading:
+    % else:
+        Readings:
+    % end
+    % for reading in readings:
+        {{!reading}}&nbsp;&nbsp;&nbsp;
+    % end
+    </div>
+  % end
+  % if defined('lectures') and (len(lectures)>0): 
+    <div class='timeline_item'>
+    Lecture notes:
+    % for lecture in lectures:
+        {{!lecture}}&nbsp;&nbsp;&nbsp;
+    % end
+    </div>
+  %end
+  % if defined('videos') and (len(videos)>0): 
+    <div class='timeline_item'>
+    % if len(videos) == 1:
+        Video:
+    % else:
+        Videos:
+    % end
+    % for video in videos:
+        {{!video}}&nbsp;&nbsp;&nbsp;
+    % end
+    </div>
+  %end
+  % if defined('worksheets') and (len(worksheets)>0): 
+    <div class='timeline_item'>
+    % if len(worksheets) == 1:
+        Worksheet:
+    % else:
+        Worksheets:
+    % end
+    % for worksheet in worksheets:
+        {{!worksheet}}&nbsp;&nbsp;&nbsp;
+    % end
+    </div>
+  % end
+  % if defined('homeworks') and (len(homeworks)>0): 
+    <div class='timeline_item'>
+    % if len(homeworks) == 1:
+        Homework:
+    % else:
+        Homeowrks:
+    % end
+    % for homework in homeworks:
+        {{!homework}}&nbsp;&nbsp;&nbsp;
+    % end
+    </div>
+  % end
+  % if defined('exams') and (len(exams)>0): 
+    <div class='timeline_item'>
+    % if len(exams) == 1:
+        Exam/midterm:
+    % else:
+        Exams/midterms"
+    % end
+    % for exam in exams:
+        {{!exam}}&nbsp;&nbsp;&nbsp;
+    % end
+    </div>
+  %end
+  % if defined('quizzes') and (len(quizzes)>0): 
+    <div class='timeline_item'>
+    % if len(quizzes) == 1:
+        Quiz:
+    % else:
+        Quizzes:
+    % end
+    % for quiz in quizzes:
+        {{!quiz}}&nbsp;&nbsp;&nbsp;
+    % end
+    </div>
+  %end
+</div>

@@ -1,0 +1,16 @@
+<details>
+  <summary>{{summary}}</summary>
+% if exam:
+  <p>
+    <b>Clarification questions only.</b>
+     We will not answer questions about content or
+     how to solve a problem.  The answer will be announced to
+     everyone and/or displayed on the screen.
+  </p>
+% end
+  <fieldset class="message" data-url="{{get_url('sendmessage')}}">
+    <textarea placeholder="{{placeholder}}"></textarea>
+    <button type="button">{{action}}</button>
+    <span></span>
+  </fieldset>
+</details>

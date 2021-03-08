@@ -1,0 +1,3 @@
+% if points:
+<span class="points">{{points}} point{{'s'[:points > 1]}}</span>
+% end

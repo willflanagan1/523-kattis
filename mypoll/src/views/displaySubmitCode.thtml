@@ -1,0 +1,37 @@
+<style>
+p.code {
+  text-align: center;
+  font-size: 80px;
+  margin: 0;
+}
+p#url {
+  text-align: center;
+  font-size: 40px;
+  font-family: monospace;
+  margin: 0;
+}
+p#notes {
+  margin: 0;
+  font-size: 40px;
+}
+</style>
+<script>
+setInterval(() => {
+  fetch('./submitcode', { headers: {'Accept': 'application/json'}})
+    .then(resp => resp.json())
+    .then(data => {
+      document.getElementById('code').innerHTML = data.code;
+      document.getElementById('time').innerHTML = data.time;
+    })
+  }, 30 * 1000);
+</script>
+% if defined('url') and url:
+  <p id="url">{{url}}</p>
+% end
+<p class="code">
+  Code <span id="code">{{code}}</span>
+  Time <span id="time">{{time}}</span>
+</p>
+<p id="notes" contenteditable="true">
+Notes.
+</p>

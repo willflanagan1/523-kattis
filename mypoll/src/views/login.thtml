@@ -1,0 +1,9 @@
+<h1>Login</h1>
+<form action="{{get_url('login')}}" method="post" >
+  <input type="text" name="user" placeholder="onyen" />
+  <input type="password" name="passwd" placeholder="onyen password" />
+  <input type="hidden" name="path" value="{{path}}" />
+  <button type="submit">Submit</button>
+  <p>{{message}}</p>
+</form>
+% rebase('assessment.base')

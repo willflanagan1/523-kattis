@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{static('css/mypoll.css')}}">
+    <link rel="stylesheet" href="{{static('katex/katex.min.css')}}">
+    <script defer src="{{static('katex/katex.min.js')}}"></script>
+    <script src="{{static('js/static.js')}}"></script>
+    <style>
+ul li.unchecked {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 0px 0px 40px;
+  background: #eee;
+  list-style-type: "\2610";
+
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Set all odd list itmes to a different color (zebra-stripes) */
+ul li.unchecked:nth-child(odd) {
+   background: #f9f9f9;
+}
+ul li.unchecked:hover {
+   background: #ddd;
+}
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  list-style-type: none;
+  text-decoration: line-through;
+}
+
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #000000;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+</style>
+  </head>
+  <body data-root="{{get_url('root')}}">
+    <section id="content" class="body">
+      <span id="user"><a href="/login">{{get_user()}}</a></span>
+      <div id="pagebody" class="entry-content">
+        <!-- This probably is not needed.  Added for future, potential debug support -->
+        % if get_user() == '':
+           <h2 style="font-size:2vw; color:red">You are not logged in, the checkmarks will not be remembered when you revisit the site</h2>
+        % end
+        {{!base}}
+      </div>
+    </section>
+ </body>
+<script>
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelectorAll("ul[class='checklist']");
+for (let i=0; i<list.length; i++) {
+   list[i].addEventListener('click', function(ev) {
+     if (ev.target.tagName === 'LI') {
+       ev.target.classList.toggle('checked');
+       const fd = new FormData();
+       fd.append('lecture_date', ev.target.parentNode.id.substr(11));
+       fd.append('item', ev.target.innerText);
+       fd.append('checked', ev.target.classList.contains('checked'));
+       fd.append('agenda_type', '{{agenda_type}}');  
+       fd.append('onyen', '{{get_user()}}');
+       fetch("{{get_url('checklistEntry')}}",
+             {method: 'post', body: fd});
+     }
+   }, false);
+};
+</script>
+</html>

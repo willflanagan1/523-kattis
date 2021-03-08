@@ -1,0 +1,15 @@
+<select name="{{name}}" id="{{name}}" data-correct="-">
+ <script>
+   var sel = document.getElementById('{{name}}');
+   var opt = document.createElement("option");
+   sel.add(opt);
+   var n = {{!sorted(choices)}};
+   n.forEach(function(n) {
+      var opt = document.createElement("option");
+      opt.value = n;
+      opt.text = n;
+      sel.add(opt);
+   });
+ </script>
+</select>
+% include('points')

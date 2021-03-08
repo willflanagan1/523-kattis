@@ -1,0 +1,62 @@
+# Reading Assignments
+
+For each lecture, it will state what the reading assignments are.
+This page is just a general reference of what readings will be needed.
+It may be helpful for exam studying.
+
+For reading assignments due for each day,
+I recommend going to the lecture notes
+that are available on the [agenda on the homepage]({{get_url('root')}}#agenda).
+
+## {{!linkable_header('Midterm 1')}}
+
+Chapters 1-4  
+Appendix A (Summations)  
+Appendix C (Probability)  
+
+## {{!linkable_header('Midterm 2: Subject to change')}}
+
+Chapter 7: Quicksort (prerequisite for course)   
+Chapter 9: Medians and Order Statistics
+
+Chapter 15: Dynamic Programming 
+
+  * Includes Rod cutting, which you are responsible for but will only be covered lightly in class
+  * Matrix Chain Multiplication which we will cover in class
+ 
+Chapter 16: Greedy Algorithms  
+Chapter 23: Minimum Spanning Trees   
+
+  * Prereq: [Graph Introduction]({{get_url('handouts', pdf='GraphSearchIntroduction')}})  
+  * Prereq: Chapter 21 Data Structures for Disjoint Sets
+
+## {{!linkable_header('Final Exam: Subject to change')}}
+
+Chapter 15.4 Longest Common Subsequence   
+Chapter 29: Linear Programming   
+Chapter 11: Hash Tables
+
+<!--
+_From here on down, the schedule is tentative_  
+
+
+Chapter 5: Probabilistic Analysis & Randomized Algorithms  
+Parts of Chapter 7: Quicksort, namely Balanced partitioning through end of chapter  
+
+
+Parts of Chapter 11: Hashing, namely 11.4 through end of chapter  
+Chapter 8: Sorting in Linear Time  
+Chapter 22: Elementary Graph Algorithms  
+Chapter 23: Minimum Spanning Trees  
+Section 21.1: Disjoint-set Operations  
+Chapters 24, 25: Shortest Paths  
+Chapter 34, following sections:  
+
+ * Introduction
+ * 34.1 up to Abstract Problems on pg. 1054    
+ * 34.2, 34.3 except Reducibility section  
+ * 34.5.   
+ * The rest of chapter 34 is entertaining but not assigned.    
+
+Chapter 35: 1st paragraph  
+-->

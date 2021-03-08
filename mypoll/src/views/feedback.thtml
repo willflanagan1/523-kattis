@@ -1,0 +1,24 @@
+<h1>Feedback for {{user}}</h1>
+<dl class="feedback">
+  <% for exam, seat in seats: %>
+  <dt><b>Seat for {{exam}}</b></dt>
+    <dd>{{seat}}</dd>
+  <% end %>
+% import itertools
+% keys = sorted([f.key for f in feedback])
+% fb = {key:list(g) for key,g in itertools.groupby(feedback, lambda f: f.key)}
+
+% for key in keys:
+%   lg = fb[key]
+%   include('feedbackitem', f=lg[0], user=user)
+%   if len(lg) > 1:
+      <details>
+        <summary>Other {{key}} submissions</summary>
+%       for f in lg[1:]:
+%         include('feedbackitem', f=f, user=user)
+%       end
+      </details>
+%   end
+% end
+</dl>
+% rebase('assessment.base')

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<h1>Bonus for worksheets</h1>
+
+
+<form id="bonus_form" method="POST" action="/worksheet_bonus">
+   <label>Section:</label> <input id="section" value="{{section}}" />
+   <p/>
+
+   <label>Onyen:</label>
+   <select id="onyen" name="onyen" required>
+      <option value="" selected disabled>Select student...</option>
+      <% for student in students: %>
+         <option value="{{student['onyen']}}">{{student['id']}}</option>
+      <% end %>
+   </select>
+   <p></p>
+
+   <label for="reason">Reason:</label>
+      <textarea type="text" id="reason" name="reason" size="40" required>
+      </textarea>
+   <p></p>
+
+   <input type="button" value="Submit Form" onclick="formsubmit()" />
+</form>
+
+<table>
+ <tr>
+   <th>Id</th>
+   <th>Onyen</th>
+   <th>Submitter</th>
+   <th>Timestamp</th>
+   <th>Reason</th>
+   <% for row in bonuses: %>
+      <tr>
+         <th>{{row['id']}}</th>
+         <th>{{row['onyen']}}</th>
+         <th>{{row['submitter']}}</th>
+         <th>{{row['timestamp']}}</th>
+         <th>{{row['reason']}}</th>
+      </tr>
+   <% end %>
+  </tr>
+
+<script>
+var section = document.getElementById("section");
+section.addEventListener("change", async (e) => {
+    var node = e.target;
+    var params = [
+        "section=" + node.value
+    ];
+
+    var newURL = "https://" + window.location.host + window.location.pathname + '?' + params.join('&');
+    location.href = newURL;
+});
+
+function formsubmit() {
+   var onyenValue = document.getElementById("onyen").value.trim();
+   var reasonValue = document.getElementById("reason").value.trim();
+   var sectionValue = document.getElementById("section").value.trim();
+
+   if (!onyenValue) {
+      alert("You must enter a student onyen");
+   } else if (!reasonValue) {
+      alert("You must enter a reason");
+   } else {
+      // Get select value and submit it on the form
+      var onyen = document.getElementById("onyen");
+      onyen.value = onyenValue;
+      onyen.type = 'hidden';
+      var section = document.getElementById("section");
+      section.value = sectionValue;
+      section.type = 'text';
+      bonus_form.submit();
+
+      document.getElementById("bonus_form").reset;
+   }
+}
+</script>
+
+% rebase('assessment.base')

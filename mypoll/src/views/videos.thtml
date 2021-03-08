@@ -1,0 +1,15 @@
+<h1>Videos</h1>
+      <table>
+         <tr>
+            <th>Video</th>
+         </tr>
+         <% for video in videos: %>
+            <tr>
+               <td>
+                  <a href="{{video['url']}}" target="_blank">{{video['name']}}</a>
+               </td>
+            </tr>
+         <% end %>
+      </table>
+
+% rebase('assessment.base')

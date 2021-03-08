@@ -1,0 +1,19 @@
+<h1>Drafts</h1>
+<dl class="feedback">
+  All drafts for COMP 550<br></br>
+  Past and present.<br></br>
+  May have already been changed to status published<br></br>
+  If a draft appears empty, it may just be empty<br></br>
+  This panel is just a catch all for all drafts<br></br>
+
+<% if defined('drafts') and drafts: %>
+<table>
+  <tr><th>Title</th></tr>
+     <% for draft in drafts: %>
+        <tr><td><a href="{{draft['url']}}" target="_blank">{{draft['title']}}</td></tr>
+     <% end %>
+</table>
+<% end %>
+</dl>
+% rebase('assessment.base')
+

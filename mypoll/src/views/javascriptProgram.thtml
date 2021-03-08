@@ -1,0 +1,6 @@
+<textarea class="javascriptProgram" rows="{{num_rows}}" cols="50" name="{{name}}"
+% include('attrs')
+  placeholder="Your code goes here"></textarea><span class="evaljavascriptmessage" style="color:red"></span>
+<span class="evaljavascript" id="javascript{{name}}"></span>
+<button type="button">Evaluate program if anything changed</button> <!-- Dummy as clicking will cause evaluations --><br />
+% include('points')

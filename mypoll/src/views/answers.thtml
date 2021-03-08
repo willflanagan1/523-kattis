@@ -1,0 +1,15 @@
+<h1>Responses for {{key}}</h1>
+<% import itertools %>
+<% for k, g in itertools.groupby(answers, key=lambda r: r[0]):
+     if k.startswith('_'):
+       continue
+     end
+%>
+    <h2>Field {{k}}</h2>
+    <table>
+    <% for field, value, count in g: %>
+      <tr><td>{{value}}</td><td>{{count}}</td></tr>
+    <% end %>
+    </table>
+<% end %>
+% rebase('assessment.base')

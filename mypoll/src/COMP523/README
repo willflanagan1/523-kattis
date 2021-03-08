@@ -1,0 +1,6 @@
+Do not compile from within this directory
+
+Go above to the src directory.
+
+This directory ASSUMES that the corresponding named module from src
+is included before this one

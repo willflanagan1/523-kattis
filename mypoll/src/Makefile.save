@@ -1,0 +1,22 @@
+
+# WARNING:
+#  Updating .env file will cause it to get copied over to /var/www/mypoll
+#  But UWSGI will not recognize the change until a `sudo systemctl restart uwsgi`
+all: deploy
+
+
+STUFF = *.ico *.py .env static static/css views md-includes images content vendor secrets.json COMP523 COMPxxx 
+
+dev:
+	npm run build
+	python3 updateRubrics.py
+	python3 app.py
+
+deploy:
+	# # minify static/js/mypoll.js static/js/monitorloading.js --output /tmp/
+	npm run build
+	rsync -a --delete $(STUFF) /var/www/mypoll/
+	# # not needed rsync /tmp/static/js/mypoll.* /var/www/mypoll/static/js/
+	# -timeout --preserve-status 3s npm run watch ; echo "" 
+	python3 updateRubrics.py
+	touch /tmp/mypoll.reload

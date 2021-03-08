@@ -1,0 +1,38 @@
+<details>
+  <summary>Expression help</summary>
+  
+<p>Expressions are similar to those in Javascript, Typescript, Python, or Java.
+Simply write the expression using the variables that were specified in the
+problem. For example: 2 * A + B</p>
+
+<style>
+table.expressionHelp {
+  border-collapse: collapse;
+}
+table.expressionHelp tr td:nth-child(1) {
+  text-align: center;
+}
+</style>
+<table class="expressionHelp">
+  <tr><td>+</td><td>addition</td></tr>
+  <tr><td>-</td><td>subtraction</td></tr>
+  <tr><td>*</td><td>multiplication</td></tr>
+  <tr><td>/</td><td>division</td></tr>
+  <tr><td>%</td><td>remainder</td></tr>
+  <tr><td>&amp;</td><td>logical and</td></tr>
+  <tr><td>|</td><td>logical or</td></tr>
+  <tr><td>^</td><td>logical exclusive or</td></tr>
+  <tr><td>~</td><td>(tilde) logical not</td></tr>
+  <tr><td>**</td><td>exponentiation</td></tr>
+  <tr><td>&lt;&lt;</td><td>shift left</td></tr>
+  <tr><td>&gt;&gt;</td><td>shift right</td></tr>
+  <tr><td>ceiling(x)</td><td>smallest integer greater than or equal x </td></tr>
+  <tr><td>floor(x)</td><td>largest integer less than or equal to x</td></tr>
+  <tr><td>sqrt(x)</td><td>square root</td></tr>
+  <tr><td>log(x)</td><td>log base e</td></tr>
+  <tr><td>log2(x)</td><td>log base 2</td></tr>
+  <tr><td>log10(x)</td><td>log base 10</td></tr>
+  <tr><td>abs(x)</td><td>absolute value</td></tr>
+</table>
+
+</details>

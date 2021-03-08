@@ -1,0 +1,11 @@
+<hr />
+<h3>
+  % if defined('video') and video:
+  <a
+    href="{{get_url('zoom', video=video.replace('https://unc.zoom.us', ''))}}"
+    target="_blank"
+    >{{ tag }}</a>
+  % else:
+  {{ tag }}
+  % end
+</h3>

@@ -1,0 +1,246 @@
+Introduction
+<!-- Z in column 1 followed by a URL is for the Zoom recording, leave URL blank for meeting url -->
+<!-- Days in the past appear blue/grey, Next day has a marker, Future is in white -->
+
+**Pre-class:** there are a few worksheets that are available as background.
+You can not submit them.
+They're just for practice:
+<ul>
+<li>[Worksheet demo]({{get_url('worksheets', key='worksheet-demo')}}) which demonstrates how to fill in worksheets.</li>
+<li>[Worksheet pseudo]({{get_url('worksheets', key='worksheet00-pseudo')}}) which demonstrates how to do pseudocode in this class.<br/>
+If you are not familiar with JavaScript, you may want to try this out.</li>
+</ul>
+
+<p></p>**Today** we will introduce the course and discuss logistics.
+
+<p></p>**For this week,** 
+read _[Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-third-edition)_,
+Third edition by Corman, Leiserson, Riverst, and Stein, a.k.a CLRS, 
+chapters one and two.
+Chapter one gives a high level of why you should study algorithms.
+Chapter two covers sorting (prerequisite) as a case study of algorithmic analysis.
+
+If possible, read over the [syllabus]({{get_url('syllabi', page_name='syllabus')}}).
+In particular, check out the section on the [textbook, Piazza, and signing up for office hours]({{get_url('syllabi', page_name='syllabus')}}#textbook,-class-discussion-site,-required-browser,-course-care),
+the [course learning objectives]({{get_url('syllabi', page_name='syllabus')}}#course-learning-objectives),
+and the discussion on how [course assignments]({{get_url('syllabi', page_name='syllabus')}}#course-assignments) like worksheets, exams, and extra credit are handled.<br />
+There will be a discussion in class about them.
+
+Z
+
+<!-- A line after a blank link that starts with a | starts another day -->
+
+| Recitation one
+
+Will answer any questions on the worksheets from yesterday
+and how worksheets in general will be used in the class.
+
+Also we'll cover [Piazza](https://piazza.com/unc/spring2021/comp550),
+[Course Care](https://comp550sp21.cs.unc.edu/video/CourseCare),
+and how office hours will work.<br />
+There will be a general discussion on office hours.
+
+Z
+
+| Chapter 2: Why Algorithms
+
+**Pre-class:** Complete [worksheet-chapter1]({{get_url('worksheets', key='worksheet-chapter1')}}) _before class_
+
+
+Per Tuesday's agenda,
+ensure that you have read CLRS chapters 1 and 2.
+
+Z
+
+| Chapter 3: Asymptotic Limits
+
+Before class, 
+read CLRS Appendix A Summations for a refresher on summations.
+You should be familiar with the concepts of how to proof for a summation is done.
+
+Before class read CLRS chapter 3,
+come to class with a basic understanding of $\Theta$, $\mathcal{O}$, and $\Omega$.
+
+Z
+
+| Recitation two
+
+Z
+
+We will work through some examples of asymptotic limits.
+
+| Asymptotic Analysis I
+
+Z
+
+| Asymptotic Analysis II
+
+Z
+
+| Recitation three
+
+Z
+
+| Recurrence Relations and Divide and Conquer I
+
+Z
+
+| Recurrence Relations and Divide and Conquer II
+
+Z
+
+| Recitation four
+
+Z
+
+| Iteration and master method
+
+Z
+
+| Health and wellness days
+No class.
+
+See [registrar calendar](https://registrar.unc.edu/files/2018/08/AcademicCalendar_081018_.pdf)
+
+Z
+
+| Midterm review
+
+Z
+
+| Iteration and master method
+
+Homework II given out
+
+Last material on midterm one on February 25th.
+
+Z
+
+| Chapter 9 Medians and Order Statistics
+
+Z
+
+| Midterm I exam
+
+Z
+
+| Chapter 9 Medians and Order Statistics
+
+Z
+
+| Chapter 9 Medians and Order Statistics
+
+Z
+
+| Recitation five
+
+Z
+
+| Dynamic Programming I
+
+Homework 3 given out
+
+Z
+
+| Dynamic Programming II
+
+Z
+
+| Recitation six
+
+Z
+
+| Mental health day
+No class
+
+See [registrar calendar](https://registrar.unc.edu/files/2018/08/AcademicCalendar_081018_.pdf)
+
+Z
+
+| Greedy Algorithms
+
+Z
+
+| Recitation seven
+
+Z
+
+| Kruskal's / Minimum Spanning Tree I
+
+Z
+
+| Kruskal's / Minimum Spanning Tree II
+
+Z
+
+| Midterm two review
+
+Z
+
+| Prim's / Minimum Spanning Tree I
+
+Z
+
+| Prim's / Minimum Spanning Tree II
+
+Z
+
+| Midterm two 
+
+Z
+
+| Longest Common Subsequence I
+
+Z
+
+| Longest Common Subsequence II
+
+Z
+
+| Recitation eight
+
+Z
+
+| Linear Programming I
+
+Z
+
+| Linear Programming II
+
+Z
+
+| Recitation nine
+
+Z
+
+| Linear Programming III
+
+Z
+
+| Cuckoo Hash
+
+Z
+
+| Recitation ten
+
+Z
+
+| Cuckoo Hash
+
+Z
+
+| TBD
+
+Z
+
+| Recitation eleven
+
+Z
+
+| TBD
+
+Z
+
+| Last day of classes
+
+Z

@@ -1,0 +1,32 @@
+all: dev
+
+STUFF = *.py static views ../content vendor secrets.json
+
+CORE = static/js/monitorloading.js.gz static/js/mypoll.js.gz
+SQL = static/js/codemirror.js.gz static/js/codemirrorsql.js.gz static/js/mysql.js.gz static/js/sql.js.gz
+MIPS = static/js/codemirror.js.gz static/js/mips.js.gz
+
+%.js: %.ts
+	cd static/js; tsc
+	minify $@ -o $@
+
+%.js.gz: %.js
+	gzip -kf $<
+
+local:
+	minify static/js/mypoll.js -d /tmp
+	gzip -kf /tmp/mypoll.js
+	rsync -a --delete $(STUFF) /var/www/mypoll-dev/
+	rsync /tmp/mypoll.* /var/www/mypoll-dev/static/js/
+	touch /tmp/mypoll-dev.reload
+
+dev:	$(CORE)
+	rsync -a --delete --exclude static/js $(STUFF) 580:/var/www/mypoll-dev/
+	rsync -a $^ 580:/var/www/mypoll-dev/static/js/
+	ssh 580 touch /tmp/mypoll-dev.reload
+
+deploy: $(CORE)
+	# python3 getAnswers.py
+	rsync -a --delete --exclude static/js $(STUFF) 580:/var/www/mypoll/
+	rsync -a $^ 580:/var/www/mypoll/static/js/
+	ssh 580 touch /tmp/mypoll.reload

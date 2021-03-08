@@ -1,0 +1,351 @@
+#!/usr/bin/python3
+'''
+Given a string of ATCG's which represent DNA proteins, determine the maximal
+folded complementarity pairs.
+
+Assume G, Guanine, matches with C, Cytosine.
+Assume A, Adenine, matches with T, Thymine.
+
+A string of AAGTT could fold on itself at A/T A/T G/G T/A T/A for a value of 4
+This would be the case of calling sring_match('AAGTT', 'TTGAA')
+
+'''
+import numpy as np
+
+def string_match(s1, s2):
+   ''' Use Numpy character length small size to save space
+   Make array -1, 1, -2, 2 for 'A', 'T', 'G', 'C'
+   Then add the two arrays together to see how many elements == 0
+   '''
+   # Assume s1 longer than s2 (makes bottom loop easier)
+   if len(s2) > len(s1):
+      s1, s2 = s2, s1  # Swap 'em
+   min_len = min(len(s1), len(s2)) 
+
+   # Convert A to -1, T to +1, G to -2, C to 2
+   n1 = np.array([(x=='A')*-1 + 
+                  (x=='T')*1 + 
+                  (x=='G')*-2 + 
+                  (x=='C')*2 for x in s1 ], dtype=np.int8)
+   n2 = np.array([(x=='A')*-1 + 
+                  (x=='T')*1 + 
+                  (x=='G')*-2 + 
+                  (x=='C')*2 for x in s2 ], dtype=np.int8)
+
+   max = -1
+   max_index = -1
+   # First compare first of n1 to last of n2, then first two of n1 to last two of n2
+   # Continue this until the smaller of the two strings.
+   # The second loop will pick up all the other cases
+   for index in range(1, min_len+1):
+      # After adding both together, count values that are zero
+      count = len(np.where((n1[:index] + n2[-index:]) == 0)[0])
+      if count > max:
+         max = count
+         max_index = index
+   # Note that the above took care of the case of n1 starting at zero when n1[:len(n1)+1]
+   
+   # Compare starting at n1[1:min_len] to n2[:-1], then n1[2:min_len] to n2[:-2]
+   # Assuming len(n1) > len(n2) make the logic easier
+   for index in range(1, len(n1)):
+       count = len(np.where((n1[index:min_len] + n2[:-index]) == 0)[0])
+       if count > max:
+          max = count
+          max_index = -index
+ 
+   return max, max_index
+
+h_1616 = ['ACCAGGCGGATAAGTG', 
+          'GACGGGAGAATTAACTTCGATAGCAGCACCGT',
+          'CCAGACCGGAAGCAAAAAAGCGGATTGCATCA',
+          'AATCGTCTGAAATGGA',
+          'CATAACCGATATATTC',
+          'CCTAATGAGTGAGCTAGTGCGGGCCTCTTCGC',
+          'TTTTTGCAAGCGGTCCACGCT',
+          'GATAAATAAGGCGTTACGCGAGAAAACTTTTT',
+          'ATTTAGGCAGAGGCATTTGAAAACATAGCGAT',
+          'CTACATTTTGACGCTCTGAAAAATCTAAAGCA',
+          'CGGATTCGCCTGATTGCCAGCAGAAGATAAAA',
+          'TCTGCGAACGAGTAGAGCGAGAGGCTTTTGCA',
+          'GAAATACCGACCGTGTACAGCCATATTATTTA',
+          'TATAAGTATAGCCCGG',
+          'GTCAGACGATTGGCCTTACCGCCACCCTCAGA',
+          'ACAGGGAAGCGCATTAACGCTAACGAGCGTCT',
+          'GTAACAGTGCCCGTATCTATTATTCTGAAACA',
+          'TAAATTGGGCTTGAGAAATCGTCATAAATATT',
+          'TCGGGAGAAACAATAACAGTACATAAATCAAT',
+          'GCAGATAGCCGAACAATTCAACCGATTGAGGG',
+          'AACAGTACCTTTTACAAGTATTAACACCGCCT',
+          'CCACCACCGGAACCGCACAACGCCTGTAGCAT',
+          'GGAATCATAATTACTATGCTGATGCAAATCCA',
+          'CTCCCTCAGAGCCGCCAATCAGTAGCGACAGA',
+          'TGGTTTAATTTCAACTTGACCCCCAGCGATTA',
+          'GCTTGATACCGATAGTCCAACCTAAAACGAAA',
+          'TTCGGTCATAGCCCCCTGTACAGACCAGGCGC',
+          'TATCATATGCGTTATAGGCTTAGGTTGGGTTA',
+          'ACCGCCACCCTCAGAA',
+          'CCCTGAGAGAGTTGCATTTTTGTAATGGGATAGGTCA',
+          'AACGCGCGGGGAGAGGCACTCCAGCCAGCTTT',
+          'AAGTACGGTGTCTGGACTTTATTTCAACGCAA',
+          'ACTTCTGAATAATGGAGTGAATTTATCAAAAT',
+          'CCTGCAGGTCGACTCTCCCGAACGTTATTAAT',
+          'AATTAACCGTTGTAGC',
+          'CCCTCAGAGCCACCACGTCACCAATGAAACCA',
+          'TTCATTACCCAAATCATTACTTAGCCGGAACG',
+          'GCGCTAATATCAGAGAAAGCCTTAAATCAAGA',
+          'CAAGTTTTTTGGGGTC',
+          'TTTTTCTGCCTATTTCGGAAC',
+          'TCATCAAGAGTAATCTTCATAAGGGAACCGAA',
+          'GTCAGAGGGTAATTGATAGCAAGGCCGGAAAC',
+          'CAGTAGGGCTTAATTGCTTGCGGGAGGTTTTG',
+          'GAACAAAGAAACCACCATCGCAAGACAAAGAA',
+          'CCTCAGAGCCGCCACCAGGGATAGCAAGCCCA',
+          'ATATCAAAATTATTTGAGCTTAGATTAAGACG',
+          'AATACTTCTTTGATTACAACTAATAGATTAGA',
+          'CATTGCAACAGGAAAACAAATATCAAACCCTC',
+          'GATACATTTCGCAAATTCGTTTACCAGACGAC',
+          'CAGGAGGTTGAGGCAGCCATTTGGGAATTAGA',
+          'TTTTATAATCAGTGAGAAACAATTCGACAACT',
+          'GCCCTTCACCGCCTGGGGTTTGCCCCAGCAGG',
+          'CACCACCCTCATTTTC',
+          'AGAACTGGCTCATTATAAAGAAGTTTTGCCAG',
+          'GAGTAACAACCCGTCGCATACAGGCAAGGCAA',
+          'GTCTGTCCATCACGCAACATTTGAGGATTTAG',
+          'GGGGCGCGAGCTGAAATTAACATCCAATAAAT',
+          'TTGCCTGAGAGTCTGGGTGCCAAGCTTGCATG',
+          'ACCCTCAGAACCGCCACGTAACACTGAGTTTC',
+          'GAATTGCGAATAATAA',
+          'AGGGTTAGAACCTACCAATCAATATCTGGTCA',
+          'CACGTAAAACAGAAATTCACCTTGCTGAACCT',
+          'TTATTTACATTGGCAGGCAACAGTGCCACGCT',
+          'ATCACCGGAACCAGAGGCGTCAGACTGTAGCG',
+          'TGATTGTTTGGATTATTTGAAAGGAATTGAGG',
+          'AACGTCAAAAATGAAACGTTTTCATCGGCATT',
+          'ACAAAATCGCGCAGAGAAACATCGCCATTAAA',
+          'CTCCAAAAGGAGCCTTTACCAAGCGCGAAACA',
+          'TGAGTTAAGCCCAATATTAGCGAACCTCCCGA',
+          'CTTTTCACCAGTGAGATGGTGGTTCCGAAATC',
+          'TAAAGCCAACGCTCAACATAGGTCTGAGAGAC',
+          'AAAACTAGCATGTCAAAAATCACCATCAATAT',
+          'CCGCCGCCAGCATTGACCGCCACCCTCAGAGC',
+          'CGAGATAGGGTTGAGT',
+          'ATTGCTCCTTTTGATAAAGGCCGGAGACAGTC',
+          'GTTCAGCTAATGCAGACCTTTTTTAATGGAAA',
+          'CTCCAACAGGTCAGGAGATATTCAACCGTTCT',
+          'AATTCTGTCCAGACGAATATGTGAGTGAATAA',
+          'TCGCATTAAATTTTTGAAGCGCCATTCGCCAT',
+          'AAACAGTTAATGCCCCTTTTTTAAAGGTGGCAACATA',
+          'AATTTCATCTTCTGACAAAGGCTATCAGGTCA',
+          'AGAAGGAGCGGAATTAGCCGTCAATAGATAAT',
+          'CAGTATGTTAGCAAACTAAAAGAAACGCAAAG',
+          'AGGTGGCATCAATTCTTTTTTTAATGCAGATACATAA',
+          'ATGAAATAGCAATAGCGCTTATCCGGTATTCT',
+          'AAGACTCCTTATTACGTCTTTCCTTATCATTC',
+          'ATTGCTGAATATAATGCATTGAATCCCCCTCA',
+          'CGCGTCTGGCCTTCCTGGCCTCAGGAAGATCG',
+          'TTTTCAGGTTTAACGTGAGAGCCAGCAGCAAA',
+          'AGCCGGAAGCATAAAGGAAAGGGGGATGTGCT',
+          'CTGTAGCTCAACATGTAACCCTCATATATTTT',
+          'TATCTTACCGAAGCCCGACGGAAATTATTCAT',
+          'CCGAGGAAACGCAATAGGTTTACCAGCGCCAA',
+          'TGTAAAGCCTGGGGTGGAACCATCACCCAAAT',
+          'GTAGCCAGCTTTCATCAGCAATAAAGCCTCAG',
+          'AGCTATATTTTCATTTGAGGCATAGTAAGAGC',
+          'CAGTCTCTGAATTTACCCGTCGAGAGGGTTGA',
+          'ATTCACCAGTCACACG',
+          'GATACAGGAGTGTACTAATAGAAAATTCATAT',
+          'AGAGGTCATTTTTGCGCAGAAAACGAGAATGA',
+          'GAATACCACATTCAACTTTTTGACAGCATCGGAACGA',
+          'GGTCAATAACCTGTTTAGAATTAGCAAAATTA',
+          'GATGAACGGTAATCGTTTCCCAGTCACGACGT',
+          'CGGTTTGCGTATTGGGAATCAAAAGAATAGCC',
+          'GGGGTCAGTGCCTTGAACACCACGGAATAAGT',
+          'TGGGATTTTGCTAAAC',
+          'GATTCTCCGTGGGAACCGTTGGTGTAGATGGG',
+          'GCCAGAATGGAAAGCGAGGGAAGGTAAATATT',
+          'CGAGCTTCAAAGCGAACCGGAGAGGGTAGCTA',
+          'AATCATGGTCATAGCTTGTAAAACGACGGCCA',
+          'TCATATGTACCCCGGTGCAAGGCGATTAAGTT',
+          'TTTTTTCACGTTGAAATGTATCATCGCCTGAT',
+          'ACGGAACAACATTATTAACACTATCATAACCC',
+          'TTTTTGAGAGATCTACCTAAATTTAATGGTTT',
+          'GAACAAGAAAAATAATAATCAATAATCGGCTG',
+          'TTAATAAAACGAACTAGGAAGTTTCCATTAAA',
+          'ACCAGTCAGGACGTTGTGCCACTACGAAGGCA',
+          'CAGATGAATATACAGTCCTTGCTTCTGTAAAT',
+          'GCCACCGAGTAAAAGA',
+          'TTTAACCAATAGGAACCCGGCACCGCTTCTGG',
+          'TGTTATCCGCTCACAAGGGTAACGCCAGGGTT',
+          'AACGTCAAAGGGCGAA',
+          'ATACATGGCTTTTGATCGGGGTTTTGCTCAGT',
+          'ACATTATCATTTTGCGAAGTATTAGACTTTAC',
+          'TGAAAGTATTAAGAGG',
+          'ACAACCATCGCCCACGCGGGTAAAATACGTAA',
+          'ATAGCAGCCTTTACAGGCCAGTTACAAAATAA',
+          'TACTCAGGAGGTTTAG',
+          'TCTTTTCATAATCAAAATAGTTAGCGTAACGA',
+          'ATACGTGGCACAGACACGAACTGATAGCCCTA',
+          'TAGAGCTTGACGGGGA',
+          'ACCTTATGCGATTTTAGAGGCAAAAGAATACA',
+          'CATTCAGTGAATAAGGAAATTGTGTCGAAATC',
+          'ATAGGCTGGCTGACCTAAAAGATTAAGAGGAA',
+          'CTAAATCGGAACCCTA',
+          'TCAGCTTGCTTTCGAGCTAAAACACTCATCTT',
+          'TGATAATCAGAAAAGCATTCAAAAGGGTGAGA',
+          'ACCTGAAAGCGTAAGA',
+          'AATAAGAATAAACACCTTCCAGAGCCTAATTT',
+          'ATCAGTTGAGATTTAGCGCCAAAAGGAATTAC',
+          'AATTACCTGAGCAAAATTTTTATTAGTCTTTAATGCG',
+          'ACATTCTGGCCAACAG',
+          'ACACCAGAACGAGTAGAAGTACAACGGAGATT',
+          'AGTTTCATTCCATATAAGGGGGTAATAGTAAA',
+          'CGATGGCCCACTACGT',
+          'ACAAGAGTCCACTATT',
+          'GGTAATAAGTTTTAACCTGAGACTCCTCAAGA',
+          'ACCCTCAGCAGCGAAATTTTT',
+          'ACAACGCCAACATGTAAAGAACGCGAGGCGTT',
+          'ACAGTTGATTCCCAATTTATGACCCTGTAATA',
+          'ACCAGTAATAAAAGGGCAGAGGTGAGGCGGTC',
+          'CGGGCAACAGCTGATTCGCATCGTAACCGTGC',
+          'GCCCGAAAGACTTCAAAAACGATTTTTTGTTT',
+          'CCTGTCGTGCCAGCTGTGCCGGAAACCAGGCA',
+          'CGAAAATCCTGTTTGA',
+          'CGAGAAAGGAAGGGAAGAATCCTGAGAAGTGT',
+          'TGCGCCGACAATGACA',
+          'GAACACCCTGAACAAAACCCAGCTACAATTTT',
+          'GAAAAAGCCTGTTTAGATCCTGAATCTTACCA',
+          'GTGAATTTCTTAAACA',
+          'TGATATTCACAAACAATAAAGGTGAATTATCA',
+          'TTTCGAGCCAGTAATAAAATCAGATATAGAAG',
+          'CAAATTCTTACCAGTATTAGTTGCTATTTTGC',
+          'TTCCACACAACATACGGAGGTGCCGTAAAGCA',
+          'CATTAATGAATCGGCCGTTGTTCCAGTTTGGA',
+          'TTTAAATATGCAACTAGCGTCCAATACTGCGG',
+          'ACGCGCCTGTTTATCACAAGAACGGGTATTAA',
+          'TTAGAGAGTACCTTTAAGGTCTTTACCCTGAC',
+          'CGCCAGGGTGGTTTTTGGACGACGACAGTATC',
+          'CTTTCCAGTCGGGAAAAAAGAACGTGGACTCC',
+          'GGTCGCTGAGGCTTGCAAAGACTTTTTCATGA',
+          'TTTTTAAGAAAAGTAAGCGCCCAATAGCAAGC',
+          'GTAGAAAATACATACATTTTTCGAGCATGTAGAAACC',
+          'CAATATTACCGCCAGC',
+          'AGAATCGCCATATTTACTGAGAAGAGTCAATA',
+          'CTTGCCCTGACGAGAAAATGCTTTAAACAGTT',
+          'TTTAGTTTGACCATTAAGCATAAAGCTAAATC',
+          'AAATGAATTTTCTGTACTGACCAACTTTGAAA',
+          'AGGGAGTTAAAGGCCG',
+          'CCGAGCTCGAATTCGTAAGCCGGCGAACGTGG',
+          'ACGCTCATGGAAATAC',
+          'TGACAAGAACCGGATATATTATAGTCAGAAGC',
+          'AGAGAATAACATAAAAATCAAGTTTGCCTTTA',
+          'ATAAGAGCAAGAAACACCGTCACCGACTTGAG',
+          'AGATAGAACCCTTCTGAATACCGAACGAACCA',
+          'TTAAATTGTAAACGTTTTGGGAAGGGCGATCG',
+          'TTCATCAATATAATCCTACCTTTTTAACCTCC',
+          'CGTTCCAGTAAGCGTCAGACAAAAGGGCGACA',
+          'ACAATAGATAAGTCCTATTAATTACATTTAAC',
+          'GCCATCAAAAATAATTGGTTGTACCAAAAACA',
+          'AAACGGCGGATTGACCTTTTTACTAATAGTAGTAGCA',
+          'AACATTAAATGTGAGCATCTGCCAGTTTGAGG',
+          'ACGTAACAAAGCTGCTCCATAAATCAAAAATC',
+          'GATGGCTTAGAGCTTATAATGTGTAGGTAAAG',
+          'ATAAATCCTCATTAAAAATAGGTGTATCACCG',
+          'CGACAAAAGGTAAAGTCGTAGGAATCATTACC',
+          'TTGTATAAGCAAATATAAATGCAATGCCTGAG',
+          'CCTGAGTAGAAGAACTAAGGTTATCTAAAATA',
+          'AAAGAAATTGCGTAGATTTTCCCTTAGAATCC',
+          'TCTAAAGTTTTGTCGTCTTTCCAGACGTTAGT',
+          'GTAATAACATCACTTG',
+          'CCCAAAAACAGGAAGATATTACGCCAGCTGGC',
+          'AGAACCACCACCAGAGGTAGCACCATTACCAT',
+          'AGAGAATATAAAGTACCGTCGCTATTAATTAA',
+          'AATATTTTGTTAAAATGGATAAAAATTTTTAG',
+          'ATAGGAACCCATGTAC',
+          'AAGAACTGGCATGATTTTATTTTGTCACAATC',
+          'TATCAGATGATGGCAATCTTTAGGAGCACTAA',
+          'GAAGGATTAGGATTAG',
+          'TTAATCATTGTGAATTATGTTTAGACTGGATA',
+          'ATCCCATCCTAATTTATTTTTGAAGATGATGAAACAA',
+          'TCCCAATCCAAATAAGATATCGCGTTTTAATT',
+          'TCATCATATTCCTGATTATAACTATATGTAAA',
+          'CTGGTAATATCCAGAAGTTGGCAAATCAACAG',
+          'TTTAAAAGTTTGAGTACAAATATATTTTAGTT',
+          'AAAGGAACAACTAAAGCGCGACCTGCTCCATG',
+          'CGACAATAAACAACATATCGAGAACAAGCAAG',
+          'TTGCGCTCACTGCCCGTCAGGCTGCGCAACTG',
+          'GGCAAAATCCCTTATA',
+          'AGCAAACAAGAGAATCAGCTGATAAATTAATG',
+          'AGTTACCAGAAGGAAACCGTTTTTATTTTCAT',
+          'CTTTGAATACCAAGTTAATTTCATTTGAATTA',
+          'GAGGACAGATGAACGGTTATTAGCGTTTGCCA',
+          'TTAAATCAGCTCATTTCTTTTGCGGGAGAAGC',
+          'CAAACTATCGGCCTTG',
+          'GCGAATTATTCATTTCACATCAAGAAAACAAA',
+          'CGTATTAAATCCTTTGAGAGGATCCCCGGGTA',
+          'TAATTGTATCGGTTTA',
+          'GATAACCCACAAGAATGCCAGCAAAATCACCA',
+          'CTTTTGCGGGATCGTCGGGTAGCAACGGCTAC',
+          'GGAAGAAAAATCTACGGATAAAAACCAAAATA',
+          'AGCGGAGTGAGAATAG',
+          'GTCACCAGTACAAACT',
+          'ACAGGTAGAAAGATTCAGAGGCTTTGAGGACT',
+          'TCCACAGACAGCCCTC',
+          'GTTTCCTGTGTGAAATAAGGGAGCCCCCGATT',
+          'ATATTTTTGAATGGCTTTTTT',
+          'ATAACGGAATACCCAAACCAAGTACCGCACTC',
+          'ACTCACATTAATTGCGAAACCGTCTATCAGGG',
+          'AACTTTCAACAGTTTCAGGCGCAGACGGTCAA',
+          'ATCTCCAAAAAAAAGG',
+         ]
+
+
+if __name__ == '__main__':
+    hairpin = 'GGCGGGTGTGGTGGTTACGCGCAGCGTGACCGCTACACTTGCCAGCGCCCTAGCGCCCGCTCCTTTCGCTTTC'
+    strings = [ ['AAGTT', 'TTGAA'],
+                ['AAGTT', 'TT'],
+                ['TT', 'AAGTT'],
+                [ hairpin, hairpin[::-1] ],
+              ]
+    for str1, str2 in strings:
+       print(f'Comparing {str1} to {str2}')
+       max, max_index = string_match(str1, str2)
+       # THis print assumes len(str1) > len(str2)
+       if len(str2) > len(str1):
+          str1, str2 = str2, str1
+       if max_index <0:
+          print(f"Maximum matches occur at offset {-max_index} {str1[-max_index:]} and {str2[:max_index]} for {max} matches")
+       else:
+          print(f"Maximum matches occur at offset {max_index} {str1[:max_index]} and {str2[-max_index:]} for {max} matches")
+    for index1 in range(len(h_1616)):
+       str1 = h_1616[index1]
+       print(f'{index1} Examining {str1}')
+       max, max_index = string_match(str1, str1[::-1])
+       str_index = index1
+       for index2 in range(index1+1, len(h_1616)):
+           str2 = h_1616[index2]
+           m, mi = string_match(str1, str1[::-1])
+           if m> max:
+              max = m
+              max_index = mi
+              str_index = index2
+
+           str2 = h_1616[index2][::-1]
+           m, mi = string_match(str1, str1[::-1])
+           if m> max:
+              max = m
+              max_index = mi
+              str_index = -index2  # Signify backwards by negative
+       
+       # Tell the user the best match
+       if str_index < 0:
+          str2 = h_1616[-str_index][::-1]  # negative str_index, so backwards string
+       else:
+           str2 = h_1616[str_index]
+       if len(str1) < len(str2):
+          str1, str2 = str2, str1
+       if max_index <0:
+          print(f"Maximum matches occur at offset {-max_index} {str1[-max_index:]} and {str2[:max_index]} for {max} matches")
+       else:
+          print(f"Maximum matches occur at offset {max_index} {str1[:max_index]} and {str2[-max_index:]} for {max} matches")
+       
+    print("OK?")

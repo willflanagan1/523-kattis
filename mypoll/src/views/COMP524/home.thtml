@@ -1,0 +1,32 @@
+<style>
+  .timeline_item {
+    align-items: stretch;
+    text-indent: 20px;
+  }
+
+  hr {
+    border:0;
+    clear:both;
+    display:block;
+    width:100%;
+    height: 1px;
+    background-color:gray;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    list-style: none;
+  }
+</style>
+
+<h1>Mypoll</h1>
+
+Logged in as {{user}}
+
+<div class="menu">
+  {{!base}}
+</div>
+
+% rebase('assessment.base')

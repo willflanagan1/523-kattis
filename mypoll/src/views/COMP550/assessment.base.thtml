@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>My poll</title>
+    <script type="module">
+      % include('static/js/monitorloading.js')
+    </script>
+    <link rel="stylesheet" href="{{static('katex/katex.min.css')}}">
+    <script defer src="{{static('katex/katex.min.js')}}"></script>
+    <link rel="stylesheet" href="{{static('css/mypoll.css')}}">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="{{static('js/bundle.js')}}"></script>
+    <% if defined('refresh'): %>
+    <meta http-equiv="refresh" content="{{refresh}}">
+    <% end %>
+   </head>
+  <body data-root="{{get_url('root')}}">
+    % if (not defined('key')) or (key != 'worksheet-demo'):
+       % include('nav', admin=False)
+    % end
+    <section id="content" class="body">
+      <div id="loading">
+        Loading, please wait.
+      </div>
+      <div id="pagebody" class="entry-content" style="display:none">
+        <span id="user">{{get_user()}}</span>
+        {{!base}}
+      </div>
+    </section>
+ </body>
+</html>

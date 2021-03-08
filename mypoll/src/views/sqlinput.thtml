@@ -1,0 +1,7 @@
+<fieldset class="sql" data-expected="{{expected}}" data-sort="{{sort}}">
+  <textarea name="{{name}}"></textarea>
+  <button type="button">Execute</button>
+% include('points')
+  <div class="sqlbusy"></div>
+  <div class="sqloutput"></div>
+</fieldset>

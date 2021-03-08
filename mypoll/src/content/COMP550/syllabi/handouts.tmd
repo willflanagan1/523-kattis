@@ -1,0 +1,13 @@
+# Handouts
+
+This page are PDF handouts associated with class.
+
+## {{!linkable_header('Up to Midterm 1')}}
+
+
+[Midterm 1 Spring 2020]({{get_url('handouts', pdf='COMP550.Spring20.Midterm1')}})  
+[Midterm 1 Fall 2020]({{get_url('handouts', pdf='COMP550.Fall20.Midterm1')}})  
+
+## {{!linkable_header('Up to Midterm 2: To be determined')}}
+
+## {{!linkable_header('Up to Final Exam: To be determined')}}

@@ -1,0 +1,249 @@
+Introduction
+<!-- Z in column 1 followed by a URL is for the Zoom recording, leave URL blank for meeting url -->
+<!-- Days in the past appear blue/grey, Next day has a marker, Future is in white -->
+
+CL Read over the [syllabus]({{get_url('syllabi', page_name='syllabus')}}) so you can ask questions about the class. | Ensure you have the [textbook]({{get_url('syllabi', page_name='syllabus')}}#textbook,-class-discussion-site,-required-browser,-course-care). | A [welcome video]({{get_url('panopto', hexcode='31c17b54-9f77-43c4-8f68-aca6010256eb')}}) is available. | Read the [syllabus section on Piazza]({{get_url('syllabi', page_name='syllabus')}}#piazza) and the [worksheet bonus for good Piazza posts]({{get_url('syllabi', page_name='syllabus')}}#worksheet-bonus). | Watch [the video](https://youtu.be/tVqWcrMPxfY) on why you should use a discussion forum like Piazza.
+
+We will introduce the course, discuss logistics and objectives, and generally discuss the [syllabus]({{get_url('syllabi', page_name='syllabus')}}).
+You can get a head start on reading chapters one and two of 
+ _[Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-third-edition)_,
+Third edition by Corman, Leiserson, Riverst, and Stein, a.k.a CLRS.
+
+S 01-1-Class-Overview.pdf 01 Class Overview
+
+S 01-2-Assessments.pdf 01 Assessments
+
+Z
+
+<!-- A line after a blank link that starts with a | starts another day -->
+
+| Recitation one
+
+CL We'll go over a [demo worksheet]({{get_url('worksheets', key='worksheet-demo')}}). Due by midnight. | We'll go over a [worksheet on pseudocode]({{get_url('worksheets', key='worksheet-00-pseudo')}}) to familiarize you with our JavaScript pseudocode. Due by midnight. | I'll show you the [worksheet on teams]({{get_url('worksheets', key='worksheet-00-teams')}}). You <font color='red'>may</font> not submit it yet. Due Friday 1/22 11:59:59 PM.
+
+I will answer any questions on the [syllabus]({{get_url('syllabi', page_name='syllabus')}}),
+if you had problems with [Piazza and Course Care for office hours]({{get_url('syllabi', page_name='syllabus')}}#textbook,-class-discussion-site,-required-browser,-course-care) now would be a good time to bring them up.
+We may also discuss why this class is important for a career in Computer Science.
+
+# S Recitation-01.pdf Recitation 01 
+
+Z
+
+| Chapter 2: Why Algorithms
+
+CL Read CLRS Chapter 1. | Complete [worksheet on chapter 1]({{get_url('worksheets', key='worksheet-chapter-1')}}) before class. | [Worksheet on teams]({{get_url('worksheets', key='worksheet-00-teams')}}) available to submit. Due by Friday 1/22 11:59:59 PM. | Watch video on the [Dirty Lowdown Triple Deal]({{get_url('panopto', hexcode='badde36b-810f-4374-addf-ac94015e0c0c')}})
+
+
+We'll discuss why algorithms are important.
+They're all around us.
+In class we'll cover the Dirty Lowdown Triple Deal card trick (not a magic trick).
+
+# S 02-WhyAlgorithms.pdf Why Algorithms
+
+Z
+
+| Chapter 3: Asymptotic Limits
+
+CL Read over CLRS Chapter 2. | Complete the [worksheet on chapter 2]({{get_url('worksheets', key='worksheet-chapter-2')}}) before class. | Read over CLRS Appendix A (see below). | Complete the [worksheet on Appendix A]({{get_url('worksheets', key='worksheet-Appendix-A')}}) before class. | Read over CLRS Chapter 3.1 | Complete the [worksheet on chapter 3.1]({{get_url('worksheets', key='worksheet-chapter-3-1')}}) before class. | Submit [worksheet on teams]({{get_url('worksheets', key='worksheet-00-teams')}}) by Friday 11:59:59 PM. | Watch video on how to sign up for [Course Care]({{get_url('panopto', hexcode='e69a803f-d891-481e-8ef8-ac9b013890ac')}}) using enrollment code `76D743`. | Ensure you are set up with [office hours]({{get_url('syllabi', page_name='syllabus')}}#textbook,-class-discussion-site,-required-browser,-course-care). | Ensure you understand CLRS p. 71 FIND-MAX-CROSSING-SUBARRAY as an example.
+
+# Worksheet 03-2-largest-sum due by midnight Tuesday
+
+Appendix A is quite long.
+We will be heavily using these four summations from CLRS Appendix A that you should have covered in prerequisite classes.
+
+ -  $\sum_{k=0}^n 1$
+ -  $\sum_{k=0}^n k$
+ -  $\sum_{k=0}^n k^2$
+ -  $\sum_{k=0}^n p^k$ where $0 &lt; p &lt; 1$
+
+You should be also familiar with the concepts of how the proof for a summation is done.
+
+ 1. Prove the base case
+ 2. Assume case $k=n$
+ 3. Given $n$, prove $k=n+1$.
+
+Please come to class with a basic understanding of $\Theta$, $\mathcal{O}$, and $\Omega$.
+
+We will apply these principles to CLRS p. 71, FIND-MAX-CROSSING-SUBARRAY.
+
+# S 03-Summation-Limits.pdf Summation Limits
+Z
+
+| Recitation two
+
+# Z
+
+# We will work through some examples of summation, actual code, and notation
+
+| Chapter 3.1: Asymptotic Notation - Asymptotic Analysis I
+
+# S 04-Asymptotic-Analysis.pdf
+# Z
+
+| Asymptotic Analysis II
+
+# Z
+
+| Recitation three
+
+# Z
+
+| Recurrence Relations and Divide and Conquer I
+
+# Z
+
+| Recurrence Relations and Divide and Conquer II
+
+# Z
+
+| Recitation four
+
+# Z
+
+| Iteration and master method
+
+# Z
+
+| Health and wellness days
+$\Rightarrow$ **No class.** $\Leftarrow$
+
+See [registrar calendar](https://registrar.unc.edu/files/2018/08/AcademicCalendar_081018_.pdf)
+
+| Midterm review
+
+# Z
+
+| Iteration and master method
+
+# Homework II given out
+
+Last material on midterm one on February 24th.
+
+# Z
+
+| Chapter 9 Medians and Order Statistics
+
+# Z
+
+| Midterm I exam
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Homework 3 given out
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+$\Rightarrow$ **No class.** $\Leftarrow$
+
+See [registrar calendar](https://registrar.unc.edu/files/2018/08/AcademicCalendar_081018_.pdf)
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z
+
+| To be determined
+
+# Z

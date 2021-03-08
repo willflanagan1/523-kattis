@@ -1,0 +1,55 @@
+<style type="text/css">
+#SimulatorState p { font-family: sans-serif; text-align:justify; }
+#SimulatorState a { font-family: sans-serif; }
+#SimulatorState h2 { font-family: sans-serif; }
+#SimulatorState h3 { font-family: sans-serif; text-align: center; }
+#SimulatorState dt { font-family: sans-serif; margin: 0px 0px 10px 0px;}
+#SimulatorState dd { font-family: sans-serif; margin: 0px 30px 0px 30px;}
+#SimulatorState code { font-size: 120%; }
+#SimulatorState textarea.editarea { font-family: monospace; padding: 5px; }
+#SimulatorState code.assembly { color: blue; font-weight: bold; margin-left: 68px; }
+#SimulatorState code.variant { color: blue; font-weight: bold; margin-left: 125px; }
+#SimulatorState code.machine { font-weight: bold; margin-left: 50px; }
+#SimulatorState code.example { font-weight: bold; margin-left: 52px; }
+#SimulatorState .description { margin-left: 125px; margin-right: 50px; text-align:justify; }
+#SimulatorState a.register { font-family: monospace; color: blue; text-decoration: none; }
+#SimulatorState a.register:hover { font-weight: bold; }
+#SimulatorState #regPopup { box-shadow: 4px 4px 8px #808080; }
+#SimulatorState input[type=button], input[type=submit] { font-size: small; cursor: pointer; padding: 2px 4px; background-color: #e0f0ff; margin: 2px 1px; box-sizing: initial; border: 1px solid; border-radius: 3px; }
+#SimulatorState td#status { font-size: 0.7em; }
+#SimulatorState td { padding: 0; }
+</style>
+<table align="center" border="2" cellspacing="2px" bgcolor="#99BADD" width="760" id="SimulatorState">
+  <tr>
+    <td colspan="8" align="center">
+      <br>
+      <h2>UNC miniMIPS Architecture Simulator V 1.2</h2>
+      <textarea rows="20" cols="78" id="AssemblerInput" name="AssemblerInput"
+       class="editarea"></textarea>
+      <textarea rows="5" cols="78" id="OutputArea" class="editarea"
+       readonly></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="8">
+      <input type="button" value="Assemble" id="AssembleButton" onclick="MIPS.assemble()">
+      <input type="button" value="Reset" id="ResetButton" onclick="MIPS.resetSimulator()">
+      <input type="button" value="Step" id="StepButton" onclick="MIPS.singleStep(1)">
+      <input type="button" value="Multistep" id="MultistepButton" onclick="MIPS.multiStep()">
+      <input type="text" size="3" value="10" id="MultistepValue"
+                                             title="Number of steps">
+      <input type="button" value="Run" id="RunButton" onclick="MIPS.runToBreakpoint()">
+      <br/>
+      <input type="button" value="Memory Dump" id="MemDumpButton" onclick="MIPS.memDump()">
+      <input type="text" size="5"
+        value="{{setdefault('MemDumpStart','0x00000000')}}" id="MemDumpStart"
+        title="dump start address (number or symbol)">
+      <input type="text" size="3"
+        value="{{setdefault('MemDumpCount', 16)}}" id="MemDumpCount"
+        title="dump word count">
+      <input type="button" value="Output Trace" id="OutputTraceButton" onclick="MIPS.outputTrace()">
+    </td>
+  </tr>
+</table>
+
+<script>MIPS.createSimulator();</script>

@@ -1,0 +1,14 @@
+    <nav>
+      <ul>
+        <li><a href="{{get_url('syllabi', page_name='syllabus')}}" target="_bank">Syllabus</a></li>
+        <li><a href="{{get_url('syllabi', page_name='reading')}}" target="_bank">Reading list</a></li>
+        <li><a href="{{get_url('syllabi', page_name='handouts')}}" target="_bank">Handouts</a></li>
+        <li><a href="{{get_url('syllabi', page_name='help')}}" target="_bank">Help</a></li>
+        % if user_is_admin(get_user()):
+           <li><a href="{{get_url('roll')}}" target="_blank">Class roll</a></li>
+           <li><a href="{{get_url('submittable')}}" target="_blank">Submittable assessments</a></li>
+           <li><a href="{{get_url('assessments')}}" target="_blank">All assessments</a></li>
+           <li><a href="{{get_url('worksheet_bonus')}}" target="_blank">Worksheet bonus</a></li>
+        % end
+      </ul>
+    </nav>

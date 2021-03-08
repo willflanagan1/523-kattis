@@ -1,0 +1,11 @@
+<h1>Responses for {{user}} on {{key}}</h1>
+<table>
+  <tr><th>Time</th><th>Field</th><th>Value</th></tr>
+% ct = None
+% for time, field, value in answers:
+%   s = 'font-weight:bold' if time != ct else ''
+%   ct = time
+  <tr style="{{s}}"><td>{{time}}</td><td>{{field}}</td><td>{{value}}</td></tr>
+% end
+</table>
+

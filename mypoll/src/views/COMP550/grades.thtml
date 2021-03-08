@@ -1,0 +1,218 @@
+<h1>Grades for Onyen: {{grades['onyen']}}; Name: {{grades['name']}} Breakout room: {{grades['team_number']}}</h1>
+
+<table>
+ <tr>
+   <th>Letter Grade</th>
+   <th>Total points</th>
+   <th>FE {{grades['fe']['percentage']}}%</th>
+   <th>M2 {{grades['midterm2']['percentage']}}%</th>
+   <th>M2 Boost</th>
+   <th>M1 {{grades['midterm1']['percentage']}}%</th>
+   <th>M1 Boost</th>
+   <th>Homework {{grades['homeworks']['percentage']}}%</th>
+   <th>WS {{grades['worksheets']['percentage']}}%</th>
+   <th>WS Bonus</th>
+ <tr>
+ <tr>
+   <th>N/A</th>
+   <th>{{round(grades['total'], 2)}}</th>
+   <th>{{round(grades['fe']['score'], 2)}}</th>
+   <th>{{round(grades['midterm2']['score'], 2)}}</th>
+   <th>{{round(grades['midterm2Boost'], 2)}}</th>
+   <th>{{round(grades['midterm1']['score'], 2)}}</th>
+   <th>{{round(grades['midterm1Boost'], 2)}}</th>
+   <th>{{round(grades['homeworks']['score'], 2)}}</th>
+   <th>{{round(grades['worksheets']['score'], 2)}}</th>
+   <th>{{round(grades['worksheet_bonus'], 2)}}</th>
+ <tr>
+</table>
+
+<% if ('worksheet' in grades) and grades['worksheet']  and len(grades['worksheet']):%>
+   <h2>Worksheets</h2>
+     <h4>{{grades['worksheets']['num_toward_score']}} worksheets count toward worksheet total</h4>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Score, Total, Percent</th>
+          <th>Message</th>
+        </tr>
+        <% for assessment in grades['worksheet']: %>
+             <tr>
+                % if assessment['id'] is None: 
+                   <th><a href="{{get_url('worksheets', key=assessment['key'])}}" target="_blank">{{assessment['key']}}</a></th>
+                % else:
+                   <th><a href="{{get_url('viewSubmission', key=assessment['key'], pid=assessment['id'], user=grades['onyen'])}}" target="_blank">{{assessment['key']}}</a></th>
+                % end 
+                <th>{{assessment['score']}},
+                    {{assessment['points_total']}},
+                    {{ round(100 * assessment['score'] / assessment['points_total'], 2) }} </th>
+                <th>{{assessment['msg']}}</th>
+             </tr>
+        <% end %>
+      </table>
+<% end %>
+
+<% if worksheet_bonus and len(worksheet_bonus): %>
+   <h2>Worksheet bonuses</h2>
+      <table>
+        <tr>
+          <th>Time</th>
+          <th>Points</th>
+          <th>Reason</th>
+        </tr>
+        <% for bonus in worksheet_bonus: %>
+             <tr>
+                <th>{{bonus["time"]}}</th>
+                <th>{{bonus["points"]}}</th>
+                <th>{{bonus["reason"]}}</th>
+             </tr>
+        <% end %>
+      </table>
+<% end %>
+
+<% if ('quiz' in grades) and grades['quiz'] and len(grades['quiz']):%>
+   <h2>Quizzes</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Score, Total, Percent</th>
+          <th>Message</th>
+        </tr>
+        <% for assessment in grades['quiz']: %>
+             <tr>
+                % if assessment['id'] is None: 
+                  <th>{{assessment['key']}}</th>
+                % else:
+                  <th><a href="{{get_url('viewSubmission', key=assessment['key'], pid=assessment['id'], user=grades['onyen'])}}">{{assessment['key']}}</a></th>
+                % end
+                <th>{{assessment['score']}},
+                    {{assessment['points_total']}},
+                    {{ round(100 * assessment['score'] / assessment['points_total'], 2) }} </th>
+                <th>{{assessment['msg']}}</th>
+             </tr>
+        <% end %>
+      </table>
+<% end %>
+
+<% if ('homework' in grades) and grades['homework'] and len(grades['homework']):%>
+   <h2>Homework</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Score, Total, Percent</th>
+          <th>Message</th>
+        </tr>
+        <% for assessment in grades['homework']: %>
+             <tr>
+                % if assessment['id'] is None: 
+                  <th>{{assessment['key']}}</th>
+                % else:
+                  <th><a href="{{get_url('viewSubmission', key=assessment['key'], pid=assessment['id'], user=grades['onyen'])}}">{{assessment['key']}} </a></th>
+                % end
+                <th>{{assessment['score']}},
+                    {{assessment['points_total']}},
+                    {{ round(100 * assessment['score'] / assessment['points_total'], 2) }} </th>
+                <th>{{assessment['msg']}}</th>
+             </tr>
+        <% end %>
+      </table>
+<% end %>
+
+<% if ('Midterm1' in grades) and grades['Midterm1'] and len(grades['Midterm1']):%>
+   <h2>Midterm 1</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Score, Total, Percent</th>
+          <th>Message</th>
+        </tr>
+        <% for assessment in grades['Midterm1']: %>
+             <tr>
+                % if assessment['id'] is None: 
+                   <th>{{assessment['key']}}</th>
+                % else:
+                   <th><a href="{{get_url('viewSubmission', key=assessment['key'], pid=assessment['id'], user=grades['onyen'])}}">{{assessment['key']}}</a></th>
+                % end
+                <th>{{assessment['score']}},
+                    {{assessment['points_total']}},
+                    {{ round(100 * assessment['score'] / assessment['points_total'], 2) }} </th>
+                <th>{{assessment['msg']}}</th>
+             </tr>
+        <% end %>
+      </table>
+<% end %>
+
+<% if ('Midterm2' in grades) and grades['Midterm2'] and len(grades['Midterm2']):%>
+   <h2>Midterm 2</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Score, Total, Percent</th>
+          <th>Message</th>
+        </tr>
+        <% for assessment in grades['Midterm2']: %>
+             <tr>
+                % if assessment['id'] is None: 
+                   <th>{{assessment['key']}}</th>
+                % else:
+                   <th><a href="{{get_url('viewSubmission', key=assessment['key'], pid=assessment['id'], user=grades['onyen'])}}">{{assessment['key']}}</a></th>
+                % end
+                <th>{{assessment['score']}},
+                    {{assessment['points_total']}},
+                    {{ round(100 * assessment['score'] / assessment['points_total'], 2) }} </th>
+                <th>{{assessment['msg']}}</th>
+             </tr>
+        <% end %>
+      </table>
+<% end %>
+
+<% if ('FE' in grades) and grades['FE'] and len(grades['FE']):%>
+   <h2>Final Exam</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Score, Total, Percent</th>
+          <th>Message</th>
+        </tr>
+        <% for assessment in grades['FE']: %>
+             <tr>
+                % if assessment['msg'] == 'Not yet graded': 
+                   <th>{{assessment['key']}}</th>
+                % else:
+                   <th><a href="{{get_url('viewSubmission', key=assessment['key'], pid=assessment['id'], user=grades['onyen'])}}">{{assessment['key']}}</a></th>
+                % end
+                <th>{{assessment['score']}},
+                    {{assessment['points_total']}},
+                    {{ round(100 * assessment['score'] / assessment['points_total'], 2) }} </th>
+                <th>{{assessment['msg']}}</th>
+             </tr>
+        <% end %>
+      </table>
+<% end %>
+
+<% if ('extracredit' in grades) and grades['extracredit'] and len(grades['extracredit']):%>
+   <h2>Extra credit</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Score, Total, Percent</th>
+          <th>Message</th>
+        </tr>
+        <% for assessment in grades['extracredit']: %>
+             <tr>
+                % if ((assessment['msg'] == 'Not yet graded') or (assessment['msg'] == 'No submission')): 
+                   <th>{{assessment['key']}}</th>
+                % else:
+                   <th><a href="{{get_url('viewSubmission', key=assessment['key'], pid=assessment['id'], user=grades['onyen'])}}">{{assessment['key']}}</a></th>
+                % end
+                <th>{{assessment['score']}},
+                    {{assessment['points_total']}},
+                    {{ round(100 * assessment['score'] / assessment['points_total'], 2) }} </th>
+                <th>{{assessment['msg']}}</th>
+             </tr>
+        <% end %>
+      </table>
+<% end %>
+
+
+% rebase('assessment.base')

@@ -1,0 +1,41 @@
+<h1>Stats</h1>
+
+<h2>Overall Total Score</h2>
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Average</th>
+    <th>Median</th>
+  </tr>
+  <tr>
+    <td>Total including drops</td>
+    <td>{{total['average_all']}}</td>
+    <td>{{total['median_all']}}</td>
+  </tr>
+  <tr>
+    <td>Total enrolled</td>
+    <td>{{total['average']}}</td>
+    <td>{{total['median']}}</td>
+  </tr>
+  <tr>
+    <td>Quizzes</td>
+    <td>{{quiz['average']}}</td>
+    <td>{{quiz['median']}}</td>
+  </tr>
+  <tr>
+    <td>Worksheets</td>
+    <td>{{worksheet['average']}}</td>
+    <td>{{worksheet['median']}}</td>
+  </tr>
+</table>
+
+<h2>Assignment scores</h2>
+<% r = lambda v: f'{v:.1f}'
+%>
+<style>
+th { text-align: center; }
+td { text-align: right; }
+table { border-collapse: collapse; }
+</style>
+{{!stats.to_html(formatters={'avg': r, 'med': r})}}
+% rebase('assessment.base')

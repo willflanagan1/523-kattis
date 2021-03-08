@@ -1,0 +1,8 @@
+<h1>Messages</h1>
+<dl>
+  <% for user, time, message in messages: %>
+    <dt>{{user}} {{time.strftime('%H:%M')}}</dt>
+    <dd>{{message}}</dd>
+  <% end %>
+</dl>
+% rebase('assessment.base'))

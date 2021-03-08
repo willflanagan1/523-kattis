@@ -1,0 +1,12 @@
+<h1>Lectures</h1>
+<dl class="feedback">
+  Lectures for COMP 550
+<br></br>
+<table>
+  <tr><th>Date</th><th>Section</th><th>Title</th></tr>
+% for title, url, lecture_date, section in lectures:
+     <tr><td>{{lecture_date}}</td><td>{{section}}</td><td><a href="{{url}}"  target="_blank">{{title}}</td></tr>
+% end
+</table>
+</dl>
+% rebase('assessment.base')

@@ -1,0 +1,14 @@
+% team = [] #  Hack JJM get_team()
+% if len(team) > 1:
+  <p>Allocate a total of 13 points to your team members based on your perception
+	  of their contribution to the project this week. Your points total cannot
+	  exceed 13.</p>
+  <ol>
+%   for member in team:
+      <li>
+        <input type="number" min=0 max=13 name="effort-{{member.onyen}}" />
+	{{member.name}}
+      </li>
+%   end
+  </ol>
+% end

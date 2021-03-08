@@ -1,0 +1,37 @@
+<h1>List submissions {{key}}</h1>
+
+<p>User {{user}} submissons for
+   <a href="{{get_url(kind, key=key, user=user)}}">{{key}}</a></p>
+<ul>
+  <% for post in posts: %>
+  <li>
+    <a href="{{get_url('viewSubmission', key=key, pid=post[1], user=user)}}">
+      {{post[0]}}  id number {{post[1]}}
+    </a>
+    % if post[2]:
+    submitted
+       % if user_is_admin(user):
+          graces={{post[3]}}
+          <input type="button" value="Unsubmit" onclick="unsubmit({{post[1]}})"/>
+       %end
+    % else:
+    autosaved
+    % end
+  </li>
+  <% end %>
+</ul>
+<script>
+async function unsubmit(postid) {
+   const fd = new FormData();
+   fd.append('key', '{{key}}');
+   fd.append('onyen', '{{user}}');
+   fd.append('postid', postid);
+
+   let response = await fetch("{{get_url('unsubmit')}}", {method: 'post', body: fd});
+   if ( !response.ok) {
+      alert("HTTP-ERROR: " + response.status )
+   }
+   location.reload();
+}
+</script>
+% rebase('assessment.base')

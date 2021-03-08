@@ -1,0 +1,231 @@
+const Babel = require("babel-core");
+/*
+ * run student code in a context
+ * prevent infinite loops
+ * count iterations
+ */
+
+/* example callback, you can provide your own in the context */
+/* you'd have some function to reset these */
+let iterations = 0;
+let start = Date.now();
+let limit = 2 * 1000; // 2 seconds
+
+/* this gets called on each iteration */
+function _loop() {
+  iterations += 1;
+  let t = Date.now();
+  if (t - start > limit) {
+    throw "Execution Timeout";
+  }
+}
+
+// compute a simple hash
+// http://stackoverflow.com/a/22429679/1115662
+function hash(str) {
+  let i,
+    l,
+    hval = 0x811c9dc5;
+  for (i = 0, l = str.length; i < l; i++) {
+    hval ^= str.charCodeAt(i);
+    hval +=
+      (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24);
+  }
+  return ("0000000" + (hval >>> 0).toString(16)).substr(-8);
+}
+
+// My functions used for Pseudocode that are not "global"
+function myLen(x) {
+   return x.length;
+}
+function BigOh(x) {
+   var y = Math.abs(x);
+   y = Math.cbrt(y);
+   return y;
+}
+function Theta(x) {
+   var y = Math.abs(x);
+   y = y ** (1/4);
+   return y;
+}
+function myLg(x) {
+   var y = Math.abs(x);
+   y = y ** (1/5);
+   return y;
+}
+function recurrence(x) {
+   var y = Math.abs(x);
+   y = y ** (1/6);
+   return y;
+}
+function Omega(x) {
+   var y = x ** 2;
+   return y;
+}
+function factorial(num) {
+  if (num < 0)
+        return -1;
+  else if (num == 0)
+      return 1;
+  else {
+      return (num * factorial(num - 1));
+  }
+}
+
+
+function evalInContext(func, context) {
+  // console.error('eic', func, context);
+  // some functions that are always available
+  const functions = {
+    BigOh: BigOh,
+    Theta: Theta,
+    recurrence: recurrence,
+    Omega: Omega,
+    lg:  myLg,
+    factorial: factorial,
+    len: myLen,
+
+    log: Math.log,
+    log10: Math.log10,
+    log2: Math.log2,
+    sqrt: Math.sqrt,
+    ceiling: Math.ceil,
+    floor: Math.floor,
+    abs: Math.abs,
+    _loop: _loop
+  };
+
+  context = Object.assign({}, functions, context);
+  const args = context._args;
+  delete context._args;
+
+  // hack from https://stackoverflow.com/questions/20256760/javascript-console-log-to-html/20256785
+  // if (typeof document != 'undefined') {
+  //    document.getElementById("javascript" + name).innerHTML = '';
+  //    (function () {
+  //        var old = console.log;
+  //        var logger;
+  //        try {
+  //           logger = document.getElementById("javascript" + name);
+  //        } catch(e) {
+  //           logger = console.log
+  //        }
+  //        print = function (message) {
+  //            if (typeof message == 'object') {
+  //                logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+  //            } else {
+  //                logger.innerHTML += message + '<br />';
+  //            }
+  //        }
+  //    })();
+  // } else {
+  //    print = console.log
+  // }
+
+  // hacked from https://medium.com/@bvjebin/js-infinite-loops-killing-em-e1c2f5f2db7f
+  let transformer = babel => {
+    var t = babel.types;
+    // transform a loop by adding our callback
+    function loopTransform(path) {
+      if ("_loop" in context) {
+        path
+          .get("body")
+          .pushContainer(
+            "body",
+            t.expressionStatement(t.callExpression(t.identifier("_loop"), []))
+          );
+      }
+    }
+
+    return {
+      visitor: {
+        // prevent endless loops
+        WhileStatement: loopTransform,
+        DoWhileStatement: loopTransform,
+        ForStatement: loopTransform,
+        // prevent member access
+        MemberExpression(path) {
+          // example of disallowing member access
+          var name = path.node.object.name;
+          var member = path.node.property.name;
+          if (member=='length') {
+             return;
+          }
+          var message = 'Object membership not allowed: ' + name + '.' + member;
+          throw path.buildCodeFrameError(message);
+        },
+        // prevent object creation
+        ObjectExpression(path) {
+          // no objects allowed
+          throw path.buildCodeFrameError("Object expression not allowed");
+        },
+        // prevent calling new
+        NewExpression(path) {
+          throw path.buildCodeFrameError("New() not allowed");
+        },
+        // prevent global variables
+        Identifier(path) {
+          let name = path.node.name;
+          if (name in context || path.scope.hasBinding(name)) {
+            return;
+          }
+          if (name == 'length') {
+            return;
+          }
+          throw path.buildCodeFrameError("No globals " + name);
+        }
+      }
+    };
+  };
+
+  // console.error('here');
+  // transform the user's code
+  try {
+    var tfunc = Babel.transform(func, { plugins: [transformer] }).code;
+  } catch (e) {
+    return { error: e.message };
+  }
+  // we should handle the insertion of the return better
+  // could the transformer somehow do it?
+  // jamming it on at the front is making lots of assumptions about the
+  // shape of their code. We could put one at the end returning a specific
+  // name, perhaps specified as an argument? Or maybe we use the transformer
+  // code to fetch the name of the function defined in the code? Suppose they
+  // define more than one? Which one to call?
+  if ("_return" in context) {
+    tfunc = tfunc + `\nreturn ${context._return}`;
+  } else {
+    tfunc = "return " + tfunc;
+  }
+  // console.error('tfunc', tfunc);
+  try {
+    var result = new Function(...Object.keys(context), tfunc)(
+      ...Object.values(context)
+    );
+  } catch (e) {
+    return { error: e.message };
+  }
+  // console.error('first result', result);
+
+  // if the result is a function and we got _args in the context, then
+  // call the function
+  if (Array.isArray(args) && result instanceof Function) {
+    try {
+      result = result(...args);
+    } catch (e) {
+      return { error: e.message };
+    }
+  }
+  // round if requested
+  let toHash = result;
+  if (typeof result == "number") {
+    toHash = result.toPrecision(context._digits);
+  }
+  // console.error('result', result);
+  // compute the hash of the result
+  const h = hash(toHash);
+  return { result: result, hash: h };
+}
+
+exports.evalInContext = evalInContext;
+exports.hash = hash;

@@ -1,0 +1,44 @@
+% import json, re
+<table class="truthtable" data-name={{name}}>
+  <tr>
+% for heading in headings.split(','):
+    <th>{{heading.replace('&#44;', ',')}}</th>
+% end
+% nh = len(headings.split(','))
+  </tr>
+% j = 0
+% for cols in table:
+  <tr>
+%   for i in range(nh):
+%     col = cols[i] if i < inputs else ''
+%     if i < inputs:
+      <td>
+      {{cols[i]}}
+%     else:
+%       nm = "%s-%d-%d" % (name, j, i)
+      <td name='td-{{name}}-{{i}}-{{j}}' id='td-{{name}}-{{i}}-{{j}}'>
+        <script>
+          var parent = document.getElementById("td-{{name}}-{{i}}-{{j}}");
+          var sel = document.createElement("select");
+          sel.name = "{{nm}}";  // Needed for correctionRateOK w/ name having - in it
+          var opt = document.createElement("option");
+          sel.add(opt);
+          var n = {{!sorted(symbols)}};
+          n.forEach(function(n) {
+            var opt = document.createElement("option");
+            opt.value= n;
+            opt.text= n;
+            sel.add(opt);
+          });
+           parent.appendChild(sel);
+        </script>
+%   end
+    </td>
+%   end
+  </tr>
+%  j += 1
+% end
+</table>
+<input id="{{name}}" type="hidden" name="{{name}}" />
+<span class="evalmessage"></span>
+% include('points')

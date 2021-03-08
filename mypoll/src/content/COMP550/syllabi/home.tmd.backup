@@ -1,0 +1,21 @@
+# COMP 550 Spring 2021
+
+## Agenda
+
+% from agenda import parse, due
+% upnext = False
+% for d in parse('content/COMP550/syllabi/agenda.tmd'):
+
+<div class="agenda {{d['when']}}" markdown=1>
+% if not upnext and d['when'] in ['present', 'future']:
+% upnext = True
+<div class="arrow_box">Next</div>
+% end
+
+### {{d['date'].strftime('%m/%d')}} {{d['title']}}
+
+{{!d['body']}}
+
+</div>
+
+% end

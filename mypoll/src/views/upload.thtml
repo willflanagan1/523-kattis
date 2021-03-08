@@ -1,0 +1,15 @@
+<h1>Upload feedback</h1>
+<form action="{{get_url('/upload-feedback')}}", method="post" enctype="multipart/form-data">
+  <input type="file" name="feedback" />
+  <input type="submit">
+</form>
+<h1>Upload teams</h1>
+<form action="{{get_url('/upload-teams')}}", method="post" enctype="multipart/form-data">
+  <input type="file" name="teams" />
+  <input type="submit">
+</form>
+<h1>Upload solution</h1>
+<form action="{{get_url('/upload-solution')}}", method="post" enctype="multipart/form-data">
+  <input type="file" name="solution" />
+  <input type="submit">
+</form>

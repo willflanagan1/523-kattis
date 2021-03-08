@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "noImplicitAny": false,
+    "lib": [
+        "es2017",
+	"es5",
+	"es6",
+        "dom",
+        "scripthost"
+    ],
+    "module": "commonjs",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true
+  }
+}

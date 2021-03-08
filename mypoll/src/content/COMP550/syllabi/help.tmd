@@ -1,0 +1,143 @@
+# Getting Help
+
+We are here to help! 
+Come in early as it's more helpful to you and office hours are more open.
+Coming in at the last minute is least helpful and most crowded.
+But please do come in.
+Office hours are a service you should enjoy using!
+
+The LAs and TAs on the [instructional team](#the-instructional-team) are fellow students who not too long ago were in your shoes.
+They know the material and are here to help!
+There office hours are spread throughout the week.
+I am sure you will find them a great resource for help.
+
+My office hours are flexible.
+After attempting to get answers during the LA/TA office hours, 
+feel free to come to me for questions on algorithms.
+If you have questions about other things, please stop on in.
+If you'd just like to talk about something else, please stop on in.
+I really value my time with students.
+It is the best part of my job and the part I'd do for free.
+
+
+If you'd like to meet with me, send me an [email](mailto:jmajikes@cs.unc.edu) and
+offer two general times when you can meet.
+More than likely I will be able to make one of them.
+As a general rule, I am busy T/TH mornings and W afternoons.
+
+[Piazza](https://piazza.com/unc/spring2021/comp550) is also an excellent place to ask questions.
+
+## {{!linkable_header('Piazza')}}
+
+We will be using [Piazza](https://piazza.com) for class discussion.
+Sign up by selecting term `Spring 2020`, 
+class `COMP 550: Algorithms and Analysis`.
+Once signed up, you can get access to the class Piazza page as [https://piazza.com/unc/spring2021/comp550](https://piazza.com/unc/spring2021/comp550).
+
+The Piazza system is efficient to send help requests to class mates, LAs, TAs, and the instructor.
+You should **not** post solutions (which would be an [Honor Code](https://studentconduct.unc.edu/honor-system/honor-system-branches/honor-court) violation).
+Think of Piazza as virtual study group.
+The answers you receive should be considered pro bono work of your classmates.
+So be kind.
+Search for answers before posting questions.
+
+For remote classes,
+Piazza will be the means of communicating class information.
+You must monitor and stay subscribed to Piazza.
+
+
+
+## {{!linkable_header('The instructional team')}}
+
+% members = ["Juan Garcia", "Peter Liu", "Patrick Ma", "Mansi Sakarvadia", "Haidong Yi", "Liyu Zhang", "Isabel Zhao", "John Majikes"]
+<div class="row">
+ <div class="twocolumns">
+ % for index in range(len(members)//2):
+ <figure>
+  <img src="{{static(f'images/team/{members[index].split()[0]}.jpg')}}" style="width:125px;" alt="">
+  <figcaption>{{members[index]}}</caption>
+ </figure>
+ % end
+ </div>
+ <div class="twocolumns">
+ % for index in range(len(members)//2, len(members)):
+ <figure>
+  <img src="{{static(f'images/team/{members[index].split()[0]}.jpg')}}" style="width:125px;" alt="">
+  <figcaption>{{members[index]}}</caption>
+ </figure>
+ % end
+ </div>
+</div>
+
+## {{!linkable_header('Office Hours')}}
+
+We will be using [Course Care](https://course.care/) to request time with the
+assistants or the professor. The course enrollment code is `76D743`.
+In order to request time you must register for Course Care.
+
+The way Course Care works is that during hours when LAs/TAs/Instructor have
+office hours, you:
+
+- Log into Course Care
+- Select COMP 550  
+- In the green box, click `Check-in`  
+- Let us know if you have an assignment problem or a conceptual problem
+- You will need to fill out the five or so items.
+- One of the items you fill in will be the URL of the Zoom meeting you scheduled
+- Ensure you are in the Zoom meeting and enabled screen sharing
+- When it is your turn in the queue, you will be joined by an instructor
+
+Note that help sessions are approximately 15 minutes in length. If you are
+working in a group, multiple people can be in the zoom meeting.
+
+### {{!linkable_header('Planned office hours')}}
+
+To be determined before the end of the first week of classes.
+
+<%
+hours = [
+(1, '14:00', '17:00', 'Peter Liu'),
+(2, '15:00', '17:30', 'Haidong Yi'),
+(2, '13:00', '15:00', 'Isabel Zhao'),
+(4, '14:00', '16:00', 'Isabel Zhao'),
+(3, '14:00', '17:00', 'Peter Liu'),
+(3, '14:00', '17:00', 'Patrick Ma'),
+(4, '13:00', '15:00', 'Isabel Zhao'),
+(4, '13:00', '18:00', 'Ankar Sharma'),
+(4, '15:00', '17:30', 'Haidong Yi'),
+(5, '13:00', '18:00', 'Ankar Sharma'),
+(5, '11:00', '14:00', 'Patrick Ma'),
+(5, '15:00', '20:30', 'Haidong Yi'),
+]
+from datetime import time
+hours = [(d, time.fromisoformat(s), time.fromisoformat(e), p)
+for d, s, e, p in hours]
+hours.sort()
+%>
+
+% pd = 0
+
+<!-- 
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Person</th>
+    </tr>
+  </thead>
+  <tbody>
+% for d, s, e, p in hours:
+%   day = d if d != pd else 0
+%   pd = d
+    <tr>
+      <td>{{['','Monday','Tuesday','Wednesday','Thursday','Friday'][day]}}</td>
+      <td>{{s.strftime('%I:%M %p').lstrip('0')}}</td>
+      <td>{{e.strftime('%I:%M %p').lstrip('0')}}</td>
+      <td>{{p}}</td>
+    </tr>
+% end
+  </tbody>
+</table>
+-->

@@ -1,0 +1,5 @@
+<input name="{{name}}" type="hidden" value="off"/>
+<input name="{{name}}" type="checkbox" data-correct="-"
+% include('attrs')
+/>
+% include('points')

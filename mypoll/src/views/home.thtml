@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<style>
+.timeline_item {
+  align-items: stretch;
+  text-indent: 20px;
+}
+hr {
+  border:0;
+clear:both;
+display:block;
+width:100%;
+height: 1px;
+background-color:gray;
+}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  list-style: none;
+}
+
+</style>
+% include('nav')
+<h1>Mypoll</h1>
+
+Logged in as {{user}}
+
+<div class="menu">
+
+  {{!base}}
+  <p/>
+
+  <table>
+    <tr>
+      &nbsp;
+      <form action="{{get_url('view')}}" target="_blank">
+        <button>View submissions</button>
+      </form>
+    </tr>
+    <tr>
+      &nbsp;
+      <form action="{{get_url('feedback')}}" target="_blank">
+        <button>View feedback</button>
+      </form>
+    </tr>
+    <tr>
+      &nbsp;
+      <form action="{{get_url('logout')}}">
+        <button id="logout"><b>Log out</b></button>
+      </form>
+    </tr>
+  <% if admin: %>
+     <br />
+     <tr>
+      &nbsp;
+      <form action="{{get_url('roll')}}" method="get" target="_blank">
+        <button class="admin"><b>All students in class</b></button>
+      </form>
+     </tr>
+     <br />
+     <tr>
+      &nbsp;
+      <form action="{{get_url('assessments')}}" method="get" target="_blank">
+        <button class="admin"><b>Assessments</b></button>
+      </form>
+     </tr>
+  <% end %>
+  </table>
+</div>
+
+% rebase('assessment.base')

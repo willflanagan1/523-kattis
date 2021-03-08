@@ -1,0 +1,13 @@
+<h1>Submissions</h1>
+
+<p>All submissions for {{user}}</p>
+<ul>
+  <% for key in sorted(keys): %>
+  <li>
+    <a href="{{get_url('viewKey', user=user, key=key[0])}}">
+      {{key[0]}}
+    </a>
+  </li>
+  <% end %>
+</ul>
+% rebase('assessment.base')

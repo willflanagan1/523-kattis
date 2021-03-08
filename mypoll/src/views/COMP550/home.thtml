@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<style>
+.timeline_item {
+  align-items: stretch;
+  text-indent: 20px;
+}
+hr {
+  border:0;
+clear:both;
+display:block;
+width:100%;
+height: 1px;
+background-color:gray;
+}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  list-style: none;
+}
+
+</style>
+% include('nav', admin={{admin}})
+<h1>Mypoll</h1>
+
+Logged in as {{user}}
+
+<div class="menu">
+
+  {{!base}}
+  <p/>
+
+  <table>
+    <tr>
+       &nbsp;
+       <form action="{{get_url('zoom', video='lecture')}}" target="_blank">
+         <input type="hidden" name="section" value="002" />
+         <button>Zoom Lecture<br/>8:00 AM T/TH</button>
+       </form>
+    </tr>
+    <tr>
+       &nbsp;
+       <form action="{{get_url('zoom', video='lecture')}}" target="_blank">
+         <input type="hidden" name="section" value="001" />
+         <button>Zoom Lecture<br/>9:45 AM T/TH</button>
+       </form>
+    </tr>
+    <tr>
+      &nbsp;
+      <form action="{{get_url('zoom', video='recitation')}}" target="_blank">
+        <button>Zoom Recitation<br/>5:20 PM W</button>
+      </form>
+    </tr>
+    <tr>
+      &nbsp;
+      <form action="{{get_url('grades')}}" target="_blank">
+        <button>Grades</button>
+      </form>
+    </tr>
+    <br />
+    <tr>
+      &nbsp;
+      <form action="{{get_url('view')}}" target="_blank">
+        <button>View submissions</button>
+      </form>
+    </tr>
+    <tr>
+      &nbsp;
+      <form action="{{get_url('feedback')}}" target="_blank">
+        <button>View feedback</button>
+      </form>
+    </tr>
+    <tr>
+      &nbsp;
+      <form action="{{get_url('logout')}}">
+        <button id="logout"><b>Log out</b></button>
+      </form>
+    </tr>
+  <% if admin: %>
+     <br />
+     <tr>
+      &nbsp;
+      <form action="{{get_url('roll')}}" method="get" target="_blank">
+        <button class="admin"><b>All students in class</b></button>
+      </form>
+     </tr>
+     <tr>
+      &nbsp;
+      <form action="{{get_url('submittable')}}" method="get" target="_blank">
+        <button class="admin"><b>Submittable assessments</b></button>
+      </form>
+     </tr>
+     <br />
+     <tr>
+      &nbsp;
+      <form action="{{get_url('assessments')}}" method="get" target="_blank">
+        <button class="admin"><b>Assessments</b></button>
+      </form>
+     </tr>
+     <tr>
+      &nbsp;
+      <form action="{{get_url('worksheet_bonus')}}" target="_blank">
+        <button class="admin"><b>Worksheet bonus</b></button>
+      </form>
+     </tr>
+     <tr>
+      &nbsp;
+      <form action="{{get_url('mathjax')}}" target="_blank">
+        <button class="admin"><b>MathJax LaTex Entry</b></button>
+      </form>
+     </tr>
+     <tr>
+      &nbsp;
+      <form action="{{get_url('notes')}}" target="_blank">
+        <button class="admin"><b>Notes data entry</b></button>
+      </form>
+     </tr>
+  <% end %>
+  </table>
+</div>
+
+% rebase('assessment.base')

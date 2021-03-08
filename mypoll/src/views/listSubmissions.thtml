@@ -1,0 +1,19 @@
+<h1>List submissions {{key}}</h1>
+
+<p>User {{user}} submissons for
+   <a href="{{get_url(kind, key=key, user=user)}}">{{key}}</a></p>
+<ul>
+  <% for post in posts: %>
+  <li>
+    <a href="{{get_url('viewSubmission', key=key, pid=post[1], user=user)}}">
+      {{post[0]}}  id number {{post[1]}}
+    </a>
+    % if post[2]:
+      submitted
+    % else:
+      autosaved
+    % end
+  </li>
+  <% end %>
+</ul>
+% rebase('assessment.base')

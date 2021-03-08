@@ -1,0 +1,3 @@
+<script>
+  sqlconnect({{!names}});
+</script>

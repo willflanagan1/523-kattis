@@ -1,0 +1,59 @@
+<h1>Active pages <a href="{{url}}" target="_blank">{{key}}</a></h1>
+
+<!-- List of pages that can potentially be deleted -->
+<ol >
+  <% for row in pages: %>
+    <li>
+      <a href="#" onclick="deleteActivePages('{{row['key']}}', '{{row['onyen']}}', '{{row['section']}}')">Delete</a>
+      key: {{row['key']}} onyen: {{row['onyen']}} section: {{row['section']}}
+      <br/>{{row['activepages']}}
+      <p/>&nbsp;
+    </li>
+  <% end %>
+</ol>
+
+<!-- Form to fill out for page access -->
+<h2>Insert page
+   <p/>
+   <form>
+     <label for="onyen">Onyen: (optional)</label><br/>
+     <input type="text" id="onyen" name="onyen"/><br/>
+
+     <p/>
+     Section: (optional)<br/>
+     <% for section in all_sections: %>
+          <input type="radio" id="{{section}}" name="section" value="{{section}}"/>
+          <label for="{{section}}">{{section}}</label>
+        <br/>
+     <% end %>
+     <p/>
+     <label for="activepages">Active pages: (required)</label><br/>
+     <input type="text" id="activepages" name="activepages" value="{{allpages}}" size="120"/><br/>
+
+     <input type="button" value="Insert" onclick="insertActivePages(onyen, section, activepages)"/>
+   </form>
+<script>
+async function insertActivePages(onyen, section, activepage) {
+   const fd = new FormData();
+   fd.append('key', '{{key}}');
+   fd.append('onyen', onyen.value);
+   fd.append('section', section.value);
+   fd.append('activepages', activepages.value);
+
+   let response = await fetch("{{get_url('insertActivePages')}}", {method: 'post', body: fd});
+   if ( !response.ok) {
+      alert("HTTP-ERROR: " + response.status )
+   }
+   location.reload();
+}
+function deleteActivePages(key, onyen, section) {
+   const fd = new FormData();
+   fd.append('key', key);
+   fd.append('onyen', onyen);
+   fd.append('section', section);
+
+   fetch("{{get_url('deleteActivePages')}}", {method: 'post', body: fd});
+   location.reload();
+}
+</script>
+% rebase('assessment.base')

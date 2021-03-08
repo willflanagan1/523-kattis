@@ -1,0 +1,37 @@
+<h1>Assessments open for submission</h1>
+      <table>
+         <tr>
+            <th>Assessment</th>
+            <th>Section</th>
+            <th>Onyen</th>
+         </tr>
+         % old_assessment = None
+         <% for a_key in sorted(assessments.keys()): %>
+            <tr>
+               <td>
+                  {{a_key}}</a>
+               </td>
+                % old_s_key = None
+               <% for s_key in sorted(assessments[a_key].keys()): %>
+                  <% if old_s_key is not None: %>
+                     </tr>
+                     <tr>
+                     <td>
+                        {{a_key}}</a>
+                     </td>
+                  <% end %>
+                  <% old_s_key = s_key %>
+                  <td>
+                     {{s_key}}
+                  </td>
+                  <td>
+                     <% for onyen in sorted(assessments[a_key][s_key]): %>
+                        {{onyen}}<br />
+                     <% end %>
+                  </td>
+               <% end %>
+            </tr>
+         <% end %>
+      </table>
+
+% rebase('assessment.base')

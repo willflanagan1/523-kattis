@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{static('css/mypoll.css')}}">
+  </head>
+  <body data-root="{{get_url('root')}}">
+    % include('nav')
+    <section id="content" class="body">
+      <span id="user"><a href="/login">{{get_user()}}</a></span>
+      <div id="pagebody" class="entry-content">
+        {{!base}}
+      </div>
+    </section>
+ </body>
+</html>

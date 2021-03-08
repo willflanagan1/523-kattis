@@ -1,0 +1,33 @@
+<table class="truthtable" name="{{name}}"  data-symbols="{{symbols}}">
+  <tr>
+% for heading in headings.split(','):
+    <th>{{heading}}</th>
+% end
+% nh = len(headings.split(','))
+  </tr>
+% j = 0
+% for row in table.split('\n'):
+  <tr>
+%   cols = row.split(',')
+%   for i in range(nh):
+%     col = cols[i] if i < inputs else ''
+    <td>
+%     if i < inputs:
+      {{cols[i]}}
+%     else:
+%       nm = "%s-%d-%d" % (name, j, i)
+      <input type="text" name="{{nm}}"
+%            if defined('attrs'):
+%              for k, v in attrs.items():
+                 {{k}}="{{v}}"
+%              end
+%            end
+      />
+%     end
+    </td>
+%   end
+  </tr>
+%  j += 1
+% end
+</table><span class="evalmessage"></span>
+% include('points')

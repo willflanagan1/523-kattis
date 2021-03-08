@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>My poll</title>
+    <link rel="stylesheet" href="{{static('katex/katex.min.css')}}">
+    <script defer src="{{static('katex/katex.min.js')}}"></script>
+    <link rel="stylesheet" href="{{static('css/mypoll.css')}}">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="{{static('js/bundle.js')}}"></script>
+    <% if defined('refresh'): %>
+    <meta http-equiv="refresh" content="{{refresh}}">
+    <% end %>
+   </head>
+  <body data-root="{{get_url('root')}}">
+    <section id="content" class="body">
+  <h1>Class roll</h1>
+
+  <p />Section: <input id="section" value="{{section}}" />
+
+  <!-- 
+  <form action="{{get_url('/roll')}}", method="post" enctype="multipart/form-data">
+      <input type="file" name="roll" />
+      <input type="submit">
+  </form>
+      -->
+  <table id="rolltable">
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)" class="checked">First name</th>
+        <th onclick="sortTable(1)" class="checked">Last name</th>
+        <th onclick="sortTable(2)" class="checked">Onyen</th>
+        <th onclick="sortTable(3)" class="checked">Section</th>
+        <th onclick="sortTable(4)" class="checked">Team</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      % for row in roll:
+        <tr>
+          <td>{{row.name[row.name.find(', ')+2:]}}</td>
+          <td>{{row.name[:row.name.find(', ')]}}</td>
+          <td>{{row.onyen}}</td>
+          <td>{{row.section}}</td>
+          <td>{{row.team_number}}-{{row.member_number}}</td>
+          <td><img src="{{row.imageurl}}" style="width:125px;height:150px;" /></td>
+        </tr>
+      % end
+  </tbody>
+  </table>
+    </section>
+  </div>
+
+<script>
+var section = document.getElementById("section");
+section.addEventListener("change", async (e) => {
+    var node = e.target;
+    var params = [
+        "section=" + node.value
+    ];
+
+    var newURL = "https://" + window.location.host + window.location.pathname + '?' + params.join('&');
+    location.href = newURL;
+});
+
+
+// https://stackoverflow.com/questions/52595645/sorting-tables-javascript
+function sortTable(n) {
+  var switchcount = 0;
+  
+  var table = document.getElementById("rolltable");
+  var switching = true;
+  var dir = "asc";
+
+  while (switching) {
+   switching = false;
+   var rows = table.rows;
+    var shouldSwitch;
+
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (var i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      var x = rows[i].getElementsByTagName("TD")[n];
+      var y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir === "asc") {
+        if (x.textContent.toLowerCase() > y.textContent.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir === "desc") {
+        if (x.textContent.toLowerCase() < y.textContent.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount++;
+    } else {
+       if (switchcount === 0 && dir === "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>

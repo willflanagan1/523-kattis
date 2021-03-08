@@ -1,0 +1,11 @@
+<h1>Post {{key}}</h1>
+
+% from datetime import datetime
+% now = datetime.now().isoformat(sep=' ', timespec='minutes')
+% if valid:
+<p>Posted {{key}} successfully for {{user}} at {{now}}</p>
+% else:
+<p style="color: red">Invalid submit code. Go back and resubmit
+with the correct code.</p>
+% end
+% rebase('assessment.base')

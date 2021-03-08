@@ -1,0 +1,134 @@
+<h1>Assessments</h1>
+<% if ("worksheets" in assessments) and (assessments["worksheets"] is not None): %>
+   <p>Worksheets</p>
+      <table>
+         <tr>
+            <th>Worksheet</th>
+            <th>Access Pages</th>
+         </tr>
+         <% for assess in assessments["worksheets"]: %>
+            <tr>
+               <td>
+                  <a href="{{get_url('worksheets', key=assess['key'])}}" target="_blank">{{assess['key']}}</a>
+               </td>
+               <td>
+                  <a href="{{get_url('pages', assessment="worksheets", key=assess['key'])}}" target="_blank">Pages</a> 
+               </td>
+            </tr>
+         <% end %>
+      </table>
+<% end %>
+
+<% if ("quizzes" in assessments) and (assessments["quizzes"] is not None): %>
+   <p>Quizzes</p>
+      <table>
+         <tr>
+            <th>Quizzes</th>
+            <th>Access Pages</th>
+         </tr>
+         <% for assess in assessments["quizzes"]: %>
+            <tr>
+               <td>
+                  <a href="{{get_url('quizzes', key=assess['key'])}}" target="_blank">{{assess['key']}}</a>
+               </td>
+               <td>
+                  <a href="{{get_url('pages', assessment="quizzes", key=assess['key'])}}" target="_blank">Pages</a> 
+               </td>
+            </tr>
+         <% end %>
+      </table>
+<% end %>
+
+<% if ("homeworks" in assessments) and (assessments["homeworks"] is not None): %>
+   <p>Homeworks</p>
+      <table>
+         <tr>
+            <th>Homeworks</th>
+            <th>Access Pages</th>
+         </tr>
+         <% for assess in assessments["homeworks"]: %>
+            <tr>
+               <td>
+                  <a href="{{get_url('homeworks', key=assess['key'])}}" target="_blank">{{assess['key']}}</a>
+               </td>
+               <td>
+                  <a href="{{get_url('pages', assessment="homeworks", key=assess['key'])}}" target="_blank">Pages</a> 
+               </td>
+            </tr>
+         <% end %>
+      </table>
+<% end %>
+
+<% if ("polls" in assessments) and (assessments["polls"] is not None): %>
+   <p>Polls</p>
+      <table>
+         <tr>
+            <th>Polls</th>
+         </tr>
+         <% for assess in assessments["polls"]: %>
+            <tr>
+               <td>
+                  <a href="{{get_url('polls', key=assess['key'])}}" target="_blank">{{assess['key']}}</a>
+               </td>
+            </tr>
+         <% end %>
+      </table>
+<% end %>
+
+<% if ("questions" in assessments) and (assessments["questions"] is not None): %>
+   <p>Questions</p>
+      <table>
+         <tr>
+            <th>Questions</th>
+         </tr>
+         <% for assess in assessments["questions"]: %>
+            <tr>
+               <td>
+                  <a href="{{get_url('questions', key=assess['key'])}}" target="_blank">{{assess['key']}}</a>
+               </td>
+            </tr>
+         <% end %>
+      </table>
+<% end %>
+
+<% if ("exams" in assessments) and (assessments["exams"] is not None): %>
+   <p>Exams</p>
+      <table>
+         <tr>
+            <th>Exams</th>
+            <th>Access Pages</th>
+         </tr>
+         <% for assess in assessments["exams"]: %>
+            <tr>
+               <td>
+                  <a href="{{get_url('exams', key=assess['key'])}}" target="_blank">{{assess['key']}}</a>
+               </td>
+               <td>
+                  <a href="{{get_url('pages', assessment="exams", key=assess['key'])}}" target="_blank">Pages</a> 
+               </td>
+            </tr>
+         <% end %>
+      </table>
+<% end %>
+
+<% if ("extracredit" in assessments) and (assessments["extracredit"] is not None): %>
+   <p>Exams</p>
+      <table>
+         <tr>
+            <th>Extra credit</th>
+            <th>Access Pages</th>
+         </tr>
+         <% for assess in assessments["extracredit"]: %>
+            <tr>
+               <td>
+                  <a href="{{get_url('extracredit', key=assess['key'])}}" target="_blank">{{assess['key']}}</a>
+               </td>
+               <td>
+                  <a href="{{get_url('pages', assessment='extracredit', key=assess['key'])}}" target="_blank">Pages</a> 
+               </td>
+            </tr>
+         <% end %>
+      </table>
+<% end %>
+
+% rebase('assessment.base')
