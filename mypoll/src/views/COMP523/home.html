@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kattis Tool</title>
+  </head>
+
+  <body>
+    <h1>Kattis Tool HTML Template</h1>
+    <a>problem description</a>
+    <form
+      action="{{get_url('/submit')}}"
+      ,
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="feedback" />
+      <input type="submit" />
+    </form>
+  </body>
+</html>
