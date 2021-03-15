@@ -1,5 +1,5 @@
 """
- COMP 550 Specific routes
+ COMP 523 Specific routes
 """
 import site
 site.addsitedir('..')
@@ -35,9 +35,6 @@ def log(*args):
 dotenv.load_dotenv()
 dotenv_values = dotenv.dotenv_values()
 
-
-
-
 @app.route("/syllabi/<page_name>", name="syllabi")
 @with_db
 @auth(user_is_known)
@@ -51,9 +48,9 @@ def syllabi(page_name, db):
    else:
       original_user = ''
    if not user_in_roll(user, db):
-      log(f"syllabi: {user} not enrolled in COMP550.")
+      log(f"syllabi: {user} not enrolled in COMP523.")
 
-   path = f"content/COMP550/syllabi/{page_name}.tmd"
+   path = f"views/COMP523/{page_name}.html"
    if not osp.exists(path):
       not_found(db)
 
@@ -80,5 +77,9 @@ def home():
    """ Display home page """
    return syllabi("home")  # pylint: disable=no-value-for-parameter
 
-
+@app.post("/submit")
+def submit():
+   """ Submit Problem """
+   # store file in kattis submissions folder or db
+   return syllabi("home")
 
