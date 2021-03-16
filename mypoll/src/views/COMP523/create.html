@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <form
+      action="{{get_url('/create_problem')}}"
+      ,
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <h2>Problem Description</h2>
+      <textarea name="description" rows="10"></textarea>
+      <h2>Problem Solution</h2>
+      <textarea style="width: auto; margin-bottom: 20px;" name="solution" cols="100" rows="5"></textarea>
+      <input type="submit" />
+    </form>
+  </body>
+</html>
+% rebase('base')
