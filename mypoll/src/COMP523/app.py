@@ -77,9 +77,31 @@ def home():
    """ Display home page """
    return syllabi("home")  # pylint: disable=no-value-for-parameter
 
+
+@app.get("/create", name="create")
+@auth(user_is_admin)
+@allow_json
+@view("create")
+def create():
+   """ Display create problem page """
+   return 
+
+
 @app.post("/submit")
 def submit():
-   """ Submit Problem """
+   """ Submit Solution """
    # store file in kattis submissions folder or db
    return syllabi("home")
 
+
+@app.post("/create_problem")
+@auth(user_is_admin)
+@with_db
+@view("create")
+def create_problem(db):
+   """ Submit new problem """
+   description = request.forms.get("description")
+   solution = request.forms.get("solution")
+   log(f"description: {description} , solution: {solution}")
+   redirect("/create")
+   
