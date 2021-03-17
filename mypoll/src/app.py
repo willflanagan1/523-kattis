@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
 A simple system for polls, problem sets, and quizes.
-test
 """
 
 from datetime import datetime, timedelta
