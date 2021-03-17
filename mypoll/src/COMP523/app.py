@@ -84,11 +84,25 @@ def create():
    """Generate a notes data entry screen"""
    return
 
+@app.get("/problems", name="problems")
+@auth(user_is_known)
+@view("problems")
+def problems():
+   """Generate a notes data entry screen"""
+   return
+
 @app.post("/submit")
 def submit():
    """ Submit Problem """
    # store file in kattis submissions folder or db
    return syllabi("home")
+
+@with_db
+def test(db):
+   db.execute("""select * from problems""")
+   result = db.fetchall()
+   for row in result:
+      log(f"{row}")
 
 @app.post("/create-problem")
 @auth(user_is_admin)
@@ -102,3 +116,6 @@ def create_problem(db):
 
    db.execute("""insert into problems (description, solution)
                   values (%s, %s)""", fb,)
+   
+test()
+
