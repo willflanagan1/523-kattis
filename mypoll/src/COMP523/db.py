@@ -314,3 +314,12 @@ def createTables(db=None):
          agenda_type text,
          onyen text references roll(onyen) ON DELETE CASCADE)""",
                         grants)
+
+   grants = [f"""grant all privileges on table problems to "{userid}" """ for userid in admins]
+   createTableAndGrants(db, "problems", """
+        create table if not exists problems
+        (id serial primary key,
+         name text,
+         description text,
+         solution text)""",
+                        grants)
