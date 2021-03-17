@@ -25,6 +25,8 @@ import pandas as pd
 from config import course_name, assessment_folders
 from inputs import inputs
 
+# test
+
 assessment_list = [ws_assessments, q_assessments, hwk_assessments,
                    m1_assessments, m2_assessments, fe_assessments]
 
