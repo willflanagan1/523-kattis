@@ -236,6 +236,8 @@ def serve(test=True):
        port = '8091'
     elif getpass.getuser() == 'cstamper':
         port = "8092"
+    elif getpass.getuser() == 'brendo':
+        port = '8093'
     else:
        port = '8087'
     server.serve(port=port, host="0.0.0.0", restart_delay=2)
