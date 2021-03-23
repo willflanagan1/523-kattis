@@ -318,6 +318,11 @@ def createTables(db=None):
    grants = [f"""grant all privileges on table problems to "{userid}" """ for userid in admins]
    createTableAndGrants(db, "problems", """
         create table if not exists problems
-        (description text,
-         solution text)""",
+        (name text,
+         description text,
+         inputDesc text, 
+         outputDesc text,
+         sampleIn text,
+         sampleOut text)""",
                         grants)
+                        
