@@ -1,17 +1,29 @@
 <html>
-  <body>
-    <form
-      action="{{get_url('/create-problem')}}"
-      ,
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <h2>Problem Description</h2>
-      <textarea name="description" rows="10"></textarea>
-      <h2>Problem Solution</h2>
-      <textarea style="width: auto; margin-bottom: 20px;" name="solution" cols="100" rows="5"></textarea>
-      <input type="submit" />
-    </form>
-  </body>
+
+<body>
+  <form action="{{get_url('/create-problem')}}" , method="post" enctype="multipart/form-data">
+
+    <label for="name">Problem Name</label>
+    <textarea style="width: auto; margin-bottom: 20px;" name="name" cols="20" rows="1"></textarea>
+
+    <label for="description">Problem Description</label>
+    <textarea style="width: auto; margin-bottom: 20px;" name="description" cols="100" rows="10"></textarea>
+
+    <label for="inputDesc">Input Description</label>
+    <textarea style="width: auto; margin-bottom: 20px;" name="inputDesc" cols="100" rows="5"></textarea>
+
+    <label for="outputDesc">Output Description</label>
+    <textarea style="width: auto; margin-bottom: 20px;" name="outputDesc" cols="100" rows="5"></textarea>
+
+    <label for="sampleIn">Sample Input</label>
+    <textarea style="width: auto; margin-bottom: 20px;" name="sampleIn" cols="100" rows="5"></textarea>
+
+    <label for="sampleOut">Sample Output</label>
+    <textarea style="width: auto; margin-bottom: 20px;" name="sampleOut" cols="100" rows="5"></textarea>
+
+    <input type="submit" />
+  </form>
+</body>
+
 </html>
 % rebase('assessment.base')

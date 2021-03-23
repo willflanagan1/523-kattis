@@ -81,15 +81,22 @@ def home():
 @auth(user_is_admin)
 @view("create")
 def create():
-   """Generate a notes data entry screen"""
+   """Generate a problem creation screen"""
    return
 
 @app.get("/problems", name="problems")
 @auth(user_is_known)
 @view("problems")
-def problems():
-   """Generate a notes data entry screen"""
-   return
+@with_db
+def problems(db):
+   """Generate screen with all problems"""
+   db.execute("""select name, description, inputDesc, outputDesc from problems""")
+   result = db.fetchall()
+   problems = []
+   for name, description, inputDesc, outputDesc in result: 
+      problems.append({"name": name, "description": description, "inputDesc": inputDesc, "outputDesc": outputDesc})
+   log(dict(data=problems))
+   return dict(data=problems)
 
 @app.post("/submit")
 def submit():
@@ -97,25 +104,23 @@ def submit():
    # store file in kattis submissions folder or db
    return syllabi("home")
 
-@with_db
-def test(db):
-   db.execute("""select * from problems""")
-   result = db.fetchall()
-   for row in result:
-      log(f"{row}")
 
 @app.post("/create-problem")
 @auth(user_is_admin)
 @view("create")
 @with_db
 def create_problem(db):
+   name = request.forms.get("name")
    description = request.forms.get("description")
-   solution = request.forms.get("solution")
-   log(f"description: {description}, solution: {solution}")
-   fb = [description, solution]
+   inputDesc = request.forms.get("inputDesc")
+   outputDesc = request.forms.get("outputDesc")
+   sampleIn = request.forms.get("sampleIn")
+   sampleOut = request.forms.get("sampleOut")
 
-   db.execute("""insert into problems (description, solution)
-                  values (%s, %s)""", fb,)
-   
-test()
+
+   fb = [name, description, inputDesc, outputDesc, sampleIn, sampleOut]
+   log(fb)
+   db.execute("""insert into problems (name, description, inputDesc, outputDesc, sampleIn, sampleOut)
+                 values (%s, %s, %s, %s, %s, %s)""", fb,)
+
 
