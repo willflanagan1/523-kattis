@@ -2,14 +2,9 @@
 <h1>Problems</h1>
 <hr></hr>
 
+
 <% for row in data: %>
-  <h2>{{row['name']}}</h2>
-  <p>{{row['description']}}</p>
-  <h4>Input</h4>
-  <p>{{row['inputDesc']}}</p>
-  <h4>Output</h4>
-  <p>{{row['outputDesc']}}</p>
-  <hr></hr>
+  <h2><a href="problem/{{row['id']}}" target="_blank">{{row['name']}}</h2>
 <% end %>
 
 % rebase('assessment.base')

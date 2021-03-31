@@ -90,13 +90,28 @@ def create():
 @with_db
 def problems(db):
    """Generate screen with all problems"""
-   db.execute("""select name, description, inputDesc, outputDesc from problems""")
+   db.execute("""select id, name from problems""")
    result = db.fetchall()
    problems = []
-   for name, description, inputDesc, outputDesc in result: 
-      problems.append({"name": name, "description": description, "inputDesc": inputDesc, "outputDesc": outputDesc})
+   for id, name in result: 
+      problems.append({"id": id, "name": name})
+   return dict(data=problems)
+
+@app.get("/problem/<pid>", name="problem")
+@auth(user_is_known)
+@view("problem")
+@with_db
+def problems(db, pid):
+   """Generate screen with problem info from problem id"""
+   fb = [pid]
+   db.execute("""select name, description, inputDesc, outputDesc, sampleIn, sampleOut from problems where id = %s""", fb)
+   result = db.fetchall()
+   problems = []
+   for name, description, inputDesc, outputDesc, sampleIn, sampleOut in result: 
+      problems.append({"name": name, "description": description, "inputDesc": inputDesc, "outputDesc": outputDesc, "sampleIn": sampleIn, "sampleOut": sampleOut})
    log(dict(data=problems))
    return dict(data=problems)
+
 
 @app.post("/submit")
 def submit():
