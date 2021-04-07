@@ -18,12 +18,14 @@ from assessments import m1_assessments, m2_assessments, fe_assessments
 from email.mime.text import MIMEText
 from datetime import datetime
 import smtplib
+import os
 import os.path as osp
 import sys
 import numpy as np
 import pandas as pd
 from config import course_name, assessment_folders
 from inputs import inputs
+from .dockerClient import verify_problem
 
 assessment_list = [ws_assessments, q_assessments, hwk_assessments,
                    m1_assessments, m2_assessments, fe_assessments]
@@ -84,11 +86,29 @@ def create():
    """Generate a problem creation screen"""
    return
 
-@app.get("/problems", name="problems")
+@app.post("/create-problem")
+@auth(user_is_admin)
+@view("create")
+@with_db
+def create_problem(db):
+   name = request.forms.get("name")
+   description = request.forms.get("description")
+   inputDesc = request.forms.get("inputDesc")
+   outputDesc = request.forms.get("outputDesc")
+   sampleIn = request.forms.get("sampleIn")
+   sampleOut = request.forms.get("sampleOut")
+
+   fb = [name, description, inputDesc, outputDesc, sampleIn, sampleOut]
+   log(fb)
+   db.execute("""insert into problems (name, description, inputDesc, outputDesc, sampleIn, sampleOut)
+                 values (%s, %s, %s, %s, %s, %s)""", fb,)
+
+
+@app.get("/all-problems", name="all-problems")
 @auth(user_is_known)
 @view("problems")
 @with_db
-def problems(db):
+def all_problems(db):
    """Generate screen with all problems"""
    db.execute("""select id, name from problems""")
    result = db.fetchall()
@@ -104,38 +124,38 @@ def problems(db):
 def problems(db, pid):
    """Generate screen with problem info from problem id"""
    fb = [pid]
-   db.execute("""select name, description, inputDesc, outputDesc, sampleIn, sampleOut from problems where id = %s""", fb)
+   db.execute("""select id, name, description, inputDesc, outputDesc, sampleIn, sampleOut from problems where id = %s""", fb)
    result = db.fetchall()
    problems = []
-   for name, description, inputDesc, outputDesc, sampleIn, sampleOut in result: 
-      problems.append({"name": name, "description": description, "inputDesc": inputDesc, "outputDesc": outputDesc, "sampleIn": sampleIn, "sampleOut": sampleOut})
-   log(dict(data=problems))
+   for id, name, description, inputDesc, outputDesc, sampleIn, sampleOut in result: 
+      problems.append({"id": id, "name": name, "description": description, "inputDesc": inputDesc, "outputDesc": outputDesc, "sampleIn": sampleIn, "sampleOut": sampleOut})
    return dict(data=problems)
 
 
-@app.post("/submit")
-def submit():
+@app.post("/submit/<pid>")
+@auth(user_is_known)
+@with_db
+def submit(db, pid):
    """ Submit Problem """
    # store file in kattis submissions folder or db
-   return syllabi("home")
+   solution = request.files.get("solution")
+   name, ext = os.path.splitext(solution.filename)
+   if ext not in ('.py', '.java'):
+        return "File extension not allowed."
 
+   fb = [pid]
+   db.execute("""select name, sampleIn, sampleOut from problems where id = %s""", fb)
+   result = db.fetchall()
+   for name, sampleIn, sampleOut in result:
+      name = name
+      sampleIn = sampleIn
+      sampleOut = sampleOut
 
-@app.post("/create-problem")
-@auth(user_is_admin)
-@view("create")
-@with_db
-def create_problem(db):
-   name = request.forms.get("name")
-   description = request.forms.get("description")
-   inputDesc = request.forms.get("inputDesc")
-   outputDesc = request.forms.get("outputDesc")
-   sampleIn = request.forms.get("sampleIn")
-   sampleOut = request.forms.get("sampleOut")
+   solution_save_path = "COMP523/kattis/problems/" + name + "/accepted"
+   solution_file_path = "{path}/{file}".format(path=solution_save_path, file=solution.filename)
+   solution.save(solution_file_path)
+   
+   log(verify_problem("different"))
 
-
-   fb = [name, description, inputDesc, outputDesc, sampleIn, sampleOut]
-   log(fb)
-   db.execute("""insert into problems (name, description, inputDesc, outputDesc, sampleIn, sampleOut)
-                 values (%s, %s, %s, %s, %s, %s)""", fb,)
-
-
+   if os.path.exists(solution_file_path):
+      os.remove(solution_file_path)
