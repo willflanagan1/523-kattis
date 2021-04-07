@@ -2,14 +2,10 @@
     <div>
       <h1>{{row['name']}}</h1>
       <a>{{row['description']}}</a>
-      <hr />
       <h4>Input</h4>
       <a>{{row['inputDesc']}}</a>
-      <hr />
       <h4>Output</h4>
       <a>{{row['outputDesc']}}</a>
-      <hr />
-
       <% if len(row['sampleIn']) != 0: %>
             <h5>Sample Input</h5> 
             <% row['sampleIn'] = row['sampleIn'].split("\r\n") 
@@ -26,7 +22,18 @@
                 <br></br>
             <% end %>
       <% end %>
-
+    </div>
+    <div>
+      <h2>Submit Solution</h2>
+      <form
+        action="/submit/{{row['id']}}"
+        ,
+        method="post"
+        enctype="multipart/form-data"
+      >
+       <input type="file" name="solution" />
+       <input type="submit" />
+     </form>
     </div>
 <% end %>
 % rebase('assessment.base')
