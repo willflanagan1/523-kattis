@@ -140,7 +140,7 @@ def submit(db, pid):
    # store file in kattis submissions folder or db
    solution = request.files.get("solution")
    name, ext = os.path.splitext(solution.filename)
-   if ext not in ('.py', '.java'):
+   if ext not in ('.py', '.java', '.c', '.cc'):
         return "File extension not allowed."
 
    fb = [pid]
@@ -151,11 +151,11 @@ def submit(db, pid):
       sampleIn = sampleIn
       sampleOut = sampleOut
 
-   solution_save_path = "COMP523/kattis/problems/" + name + "/accepted"
+   solution_save_path = f"COMP523/kattis/problems/{name}/submissions/accepted"
    solution_file_path = "{path}/{file}".format(path=solution_save_path, file=solution.filename)
    solution.save(solution_file_path)
    
-   log(verify_problem("different"))
+   log(verify_problem(name))
 
    if os.path.exists(solution_file_path):
       os.remove(solution_file_path)
