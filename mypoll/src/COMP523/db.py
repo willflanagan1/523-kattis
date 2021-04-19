@@ -315,7 +315,8 @@ def createTables(db=None):
          onyen text references roll(onyen) ON DELETE CASCADE)""",
                         grants)
 
-   grants = [f"""grant all privileges on table problems to "{userid}" """ for userid in admins]
+   grants = ([f"""grant all privileges on table problems to "{userid}" """ for userid in admins] + 
+               [f"""grant all privileges on table problems_id_seq to "{userid}" """ for userid in admins])
    createTableAndGrants(db, "problems", """
         create table if not exists problems
         (id serial primary key,
@@ -327,7 +328,8 @@ def createTables(db=None):
          sampleOut text)""",
                         grants)
    
-   grants = [f"""grant all privileges on table user_submissions to "{userid}" """ for userid in admins]
+   grants = ([f"""grant all privileges on table user_submissions to "{userid}" """ for userid in admins] +
+             [f"""grant all privileges on table user_submissions_id_seq to "{userid}" """ for userid in admins])
    createTableAndGrants(db, "user_submissions", """
         create table if not exists user_submissions
         (id serial primary key,
