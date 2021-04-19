@@ -326,4 +326,15 @@ def createTables(db=None):
          sampleIn text,
          sampleOut text)""",
                         grants)
+   
+   grants = [f"""grant all privileges on table user_submissions to "{userid}" """ for userid in admins]
+   createTableAndGrants(db, "user_submissions", """
+        create table if not exists user_submissions
+        (id serial primary key,
+         date timestamp,
+         name text,
+         onyen text,
+         submitted boolean default false,
+         correct boolean default false)""",
+                        grants)
                         
