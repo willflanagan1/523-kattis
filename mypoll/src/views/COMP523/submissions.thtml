@@ -1,0 +1,12 @@
+<!--Figure out how to display stuff from DB-->
+<h1>Submissions</h1>
+<hr></hr>
+
+
+<% for row in data: %>
+  <h2>{{row['name']}}</h2>
+  <p>Date Submitted: {{row['date']}}</p>
+  <p>Correct: {{row['correct']}}</p>
+<% end %>
+
+% rebase('assessment.base')
