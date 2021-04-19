@@ -96,6 +96,7 @@ def create():
 @view("create")
 @with_db
 def create_problem(db):
+   """Creates a new problem based off admin input"""
    name = request.forms.get("name")
    description = request.forms.get("description")
    inputDesc = request.forms.get("inputDesc")
@@ -103,18 +104,18 @@ def create_problem(db):
    sampleIn = request.forms.get("sampleIn")
    sampleOut = request.forms.get("sampleOut")
 
+   #inserts data into problems db
    fb = [name, description, inputDesc, outputDesc, sampleIn, sampleOut]
-   log(fb)
    db.execute("""insert into problems (name, description, inputDesc, outputDesc, sampleIn, sampleOut)
                  values (%s, %s, %s, %s, %s, %s)""", fb,)
 
 
-@app.get("/all-problems", name="all-problems")
+@app.get("/problems", name="problems")
 @auth(user_is_known)
 @view("problems")
 @with_db
 def all_problems(db):
-   """Generate screen with all problems"""
+   """Generates screen with list of all problems"""
    db.execute("""select id, name from problems""")
    result = db.fetchall()
    problems = []
@@ -127,7 +128,7 @@ def all_problems(db):
 @view("problem")
 @with_db
 def problems(db, pid):
-   """Generate screen with problem info from problem id"""
+   """Generates screen with specific problem details"""
    fb = [pid]
    db.execute("""select id, name, description, inputDesc, outputDesc, sampleIn, sampleOut from problems where id = %s""", fb)
    result = db.fetchall()
@@ -140,15 +141,18 @@ def problems(db, pid):
 @auth(user_is_known)
 @with_db
 def submit(db, pid):
-   """ Submit Problem """
-   # store file in kattis submissions folder or db
+   """Submits student uploaded solution"""
+
    ct = datetime.now()
    user = get_user()
+
+   #gets solution from form and checks language
    solution = request.files.get("solution")
    name, ext = os.path.splitext(solution.filename)
    if ext not in ('.py', '.java', '.c', '.cc'):
         return "File extension not allowed."
 
+   #gets input and output for the specific problem
    fb = [pid]
    db.execute("""select name, sampleIn, sampleOut from problems where id = %s""", fb)
    result = db.fetchall()
@@ -157,25 +161,36 @@ def submit(db, pid):
       sampleIn = sampleIn
       sampleOut = sampleOut
 
+   #saves file into a tmp folder
    solution_save_path = f"COMP523/temp_submissions"
    solution_file_path = "{path}/{file}".format(path=solution_save_path, file=solution.filename)
    solution.save(solution_file_path)
 
+   #TO DO: add different functions depending on language submitted. just need to create a check_ouput for each language
+   #runs uploaded script with sampleIn and tests that the script output matches sampleOut
    try:
-      script_output = check_output([sys.executable, solution_file_path],
-                      input=sampleIn,
-                      universal_newlines=True)
+      #checks if there is no sampleIn
+      if (len(sampleIn) != 0):
+         #runs the script in a shell subprocess
+         script_output = check_output([sys.executable, solution_file_path],
+                        input=sampleIn,
+                        universal_newlines=True)
+      else:
+         script_output = check_output([sys.executable, solution_file_path],
+                        universal_newlines=True)
       script_output = " ".join(script_output.split())
       sampleOut = " ".join(sampleOut.split())
-
       check_submission = (script_output == sampleOut)
    except:
+      #if error, submission check is false
       check_submission = False
 
+   #insert this submission instance into db
    fb = [ct, name, user, True, check_submission]
    db.execute("""insert into user_submissions (date, name, onyen, submitted, correct)
       values(%s, %s, %s, %s, %s)""", fb,)
 
+   #deletes the file from the tmp folder
    if os.path.exists(solution_file_path):
       os.remove(solution_file_path)
 
@@ -183,14 +198,15 @@ def submit(db, pid):
 @auth(user_is_known)
 @view("submissions")
 @with_db
-def create(db):
+def submissions(db):
+   """Gets submissions from db given user"""
    user = get_user()
    fb = [user]
-   db.execute("""select id, date, name, submitted, correct from user_submissions where onyen = %s""", fb)
+   db.execute("""select id, date, onyen, name, submitted, correct from user_submissions where onyen = %s order by date desc""", fb)
    result = db.fetchall()
    submissions = []
-   for id, date, name, submitted, correct in result: 
-      submissions.append({"id": id, "date": date, "name": name, "submitted": submitted, "correct": correct})
+   for id, date, onyen, name, submitted, correct in result: 
+      submissions.append({"id": id, "date": date, "onyen": onyen, "name": name, "submitted": submitted, "correct": correct})
    return dict(data=submissions)
 
 

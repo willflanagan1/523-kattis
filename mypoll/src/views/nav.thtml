@@ -1,5 +1,6 @@
     <nav>
       <ul>
         <li><a href="{{get_url('root')}}">Home</a></li>
+        <li><a href="{{get_url('submissions')}}">Submissions</a></li>
       </ul>
     </nav>

@@ -2,28 +2,33 @@
     <div>
       <h1>{{row['name']}}</h1>
       <a>{{row['description']}}</a>
-      <h4>Input</h4>
+      <h4>Input Description</h4>
       <a>{{row['inputDesc']}}</a>
-      <h4>Output</h4>
+      <h4>Output Description</h4>
       <a>{{row['outputDesc']}}</a>
+      <hr></hr>
       <% if len(row['sampleIn']) != 0: %>
-            <h5>Sample Input</h5> 
+          <div style="display: inline-block; margin-right: 30px">
+            <p style="font-weight: bold">Sample Input</p> 
             <% row['sampleIn'] = row['sampleIn'].split("\r\n") 
             for line in row['sampleIn']: %>
                 <a>{{line}}</a>
                 <br></br>
              <% end %>
+          </div>
       <% end %>
       <% if len(row['sampleOut']) != 0: %>
-            <h5>Sample Output</h5> 
+          <div style="display: inline-block;">
+            <p style="font-weight: bold">Sample Output</p> 
             <% row['sampleOut'] = row['sampleOut'].split("\r\n") 
             for line in row['sampleOut']: %>
                 <a>{{line}}</a>
                 <br></br>
             <% end %>
+          </div>
       <% end %>
     </div>
-    <div>
+    <div style="display: block">
       <h2>Submit Solution</h2>
       <form
         action="/submit/{{row['id']}}"

@@ -1,12 +1,16 @@
 <!--Figure out how to display stuff from DB-->
-<h1>Submissions</h1>
-<hr></hr>
+<% if len(data) > 0: %>
+  <h1>Submissions for {{data[0]['onyen']}} </h1>
+  <hr></hr>
 
 
-<% for row in data: %>
-  <h2>{{row['name']}}</h2>
-  <p>Date Submitted: {{row['date']}}</p>
-  <p>Correct: {{row['correct']}}</p>
+  <% for row in data: %>
+    <h2>{{row['name']}}</h2>
+    <p>Date Submitted: {{row['date']}}</p>
+    <p>Correct: {{row['correct']}}</p>
+  <% end %>
+<% else: %>
+  <h1>No Submissions</h1>
 <% end %>
 
 % rebase('assessment.base')
