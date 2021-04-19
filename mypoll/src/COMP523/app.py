@@ -157,7 +157,7 @@ def submit(db, pid):
       sampleIn = sampleIn
       sampleOut = sampleOut
 
-   solution_save_path = f"COMP523/kattis/problems/{name}/submissions/accepted"
+   solution_save_path = f"COMP523/temp_submissions"
    solution_file_path = "{path}/{file}".format(path=solution_save_path, file=solution.filename)
    solution.save(solution_file_path)
 
