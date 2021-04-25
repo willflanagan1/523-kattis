@@ -26,7 +26,7 @@ import numpy as np
 import pandas as pd
 from config import course_name, assessment_folders
 from inputs import inputs
-from .dockerClient import verify_problem
+from .dockerClient import run_submission
 from subprocess import check_output
 from datetime import datetime
 
@@ -149,7 +149,7 @@ def submit(db, pid):
    #gets solution from form and checks language
    solution = request.files.get("solution")
    name, ext = os.path.splitext(solution.filename)
-   if ext not in ('.py', '.java', '.c', '.cc'):
+   if ext not in ('.py'):
         return "File extension not allowed."
 
    #gets input and output for the specific problem
@@ -162,22 +162,17 @@ def submit(db, pid):
       sampleOut = sampleOut
 
    #saves file into a tmp folder
-   solution_save_path = f"COMP523/temp_submissions"
+   solution_save_path = f"COMP523/container/submissions"
    solution_file_path = "{path}/{file}".format(path=solution_save_path, file=solution.filename)
    solution.save(solution_file_path)
+
+   with open("COMP523/container/submissions/sampleInput.txt", "w") as input_file:
+      print(f"{sampleIn}", file=input_file)
 
    #TO DO: add different functions depending on language submitted. just need to create a check_ouput for each language
    #runs uploaded script with sampleIn and tests that the script output matches sampleOut
    try:
-      #checks if there is no sampleIn
-      if (len(sampleIn) != 0):
-         #runs the script in a shell subprocess
-         script_output = check_output([sys.executable, solution_file_path],
-                        input=sampleIn,
-                        universal_newlines=True)
-      else:
-         script_output = check_output([sys.executable, solution_file_path],
-                        universal_newlines=True)
+      script_output = run_submission(solution.filename)
       script_output = " ".join(script_output.split())
       sampleOut = " ".join(sampleOut.split())
       check_submission = (script_output == sampleOut)
