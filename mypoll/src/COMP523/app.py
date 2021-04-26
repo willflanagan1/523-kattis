@@ -10,7 +10,7 @@ site.addsitedir('..')
 from appbase import app, auth, user_is_known, get_user, user_is_admin, allow_json, get_url
 from app import renderTemplate, renderMarkdown
 from app import not_found, not_allowed, user_in_roll
-from bottle import view, request, redirect, HTTPError, static_file
+from bottle import view, request, redirect, HTTPError, static_file, template
 from db import with_db
 import dotenv
 from editRubrics import editRubrics
@@ -29,6 +29,7 @@ from inputs import inputs
 from .dockerClient import run_submission
 from subprocess import check_output
 from datetime import datetime
+import time
 
 
 
@@ -76,7 +77,6 @@ def syllabi(page_name, db):
                  )
    return {"base": content, "title": title, "user": user, "admin": user_is_admin(user),
            "agenda_type": 'student'}
-
 
 @app.route("/", name="root")
 @auth(user_is_known)
@@ -188,6 +188,8 @@ def submit(db, pid):
    #deletes the file from the tmp folder
    if os.path.exists(solution_file_path):
       os.remove(solution_file_path)
+   
+   return template('Successfully Submitted {{name}} for {{user}}', name=name, user=user)
 
 @app.get("/submissions", name="submissions")
 @auth(user_is_known)
