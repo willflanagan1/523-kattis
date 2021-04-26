@@ -10,10 +10,14 @@ def run_submission(name):
     command = f'python3 /app/evaluator.py {name}'
     container = client.containers.run(image, command, volumes=volume, detach=True)
 
-    time.sleep(15)
+    # Check for logs every second for 15 seconds 
+    for i in range(0, 15):
+        log = container.logs()
+        if log.decode("utf-8") is not '':
+            # break loop if logs are returned
+            break
+        time.sleep(1)
 
-    # trim logs to match format
-    log = container.logs()
     size = len(log)
     trimmedLog = log[:size - 1]
 
