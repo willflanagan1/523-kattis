@@ -1,13 +1,27 @@
-<!--Figure out how to display stuff from DB-->
+<!DOCTYPE html>
+<style>
+.correct {
+  margin-bottom: 30px;
+}
+
+.True {
+  color: green;
+}
+
+.False {
+  color: red;
+}
+
+
+</style>
 <% if len(data) > 0: %>
-  <h1>Submissions for {{data[0]['onyen']}} </h1>
+  <h1>Submissions for {{data[0]['onyen']}}: {{data[0]['name']}} </h1>
   <hr></hr>
 
 
   <% for row in data: %>
-    <h2>{{row['name']}}</h2>
-    <p>Date Submitted: {{row['date']}}</p>
-    <p>Correct: {{row['correct']}}</p>
+    <p style="font-weight: bold">Date Submitted: {{row['date']}}</p>
+    <p class="correct ">Correct: <span class="{{row['correct']}}">{{row['correct']}}</span></p>
   <% end %>
 <% else: %>
   <h1>No Submissions</h1>

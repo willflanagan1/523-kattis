@@ -1,0 +1,15 @@
+<!--Figure out how to display stuff from DB-->
+<% user = get_user()
+  if len(data) > 0: %>
+  <h1>Submissions for {{user}} </h1>
+  <hr></hr>
+
+
+  <% for row in data: %>
+    <h2><a href="submissions/{{row['name']}}" target="_blank">{{row['name']}}</h2>
+  <% end %>
+<% else: %>
+  <h1>No Submissions</h1>
+<% end %>
+
+% rebase('assessment.base')

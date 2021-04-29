@@ -192,19 +192,36 @@ def submit(db, pid):
    
    return template('Successfully Submitted {{name}} for {{user}}', name=name, user=user)
 
-@app.get("/submissions", name="submissions")
+@app.get("/submittedproblems", name="submittedproblems")
+@auth(user_is_known)
+@view("submittedproblems")
+@with_db
+def submittedProblems(db):
+   """Gets submissions from db given user"""
+   fb = [True]
+   """Generates screen with list of all submitted problems"""
+   db.execute("""select id, name from user_submissions where submitted = %s""", fb,)
+   result = db.fetchall()
+   problems = []
+   seen = []
+   for id, name in result:
+      if name not in seen: 
+         problems.append({"id": id, "name": name})
+         seen.append(name)
+
+   return dict(data=problems)
+
+   
+@app.get("/submissions/<name>", name="submissions")
 @auth(user_is_known)
 @view("submissions")
 @with_db
-def submissions(db):
-   """Gets submissions from db given user"""
+def submissions(db, name):
    user = get_user()
-   fb = [user]
-   db.execute("""select id, date, onyen, name, submitted, correct from user_submissions where onyen = %s order by date desc""", fb)
+   fb = [user, name]
+   db.execute("""select id, date, onyen, name, submitted, correct from user_submissions where onyen = %s and name = %s order by date desc""", fb,)
    result = db.fetchall()
    submissions = []
    for id, date, onyen, name, submitted, correct in result: 
       submissions.append({"id": id, "date": date, "onyen": onyen, "name": name, "submitted": submitted, "correct": correct})
    return dict(data=submissions)
-
-
