@@ -80,9 +80,10 @@ def syllabi(page_name, db):
 
 @app.route("/", name="root")
 @auth(user_is_known)
+@view("home")
 def home():
    """ Display home page """
-   return syllabi("home")  # pylint: disable=no-value-for-parameter
+   return # pylint: disable=no-value-for-parameter
 
 @app.get("/create", name="create")
 @auth(user_is_admin)

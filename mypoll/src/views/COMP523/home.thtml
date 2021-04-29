@@ -1,0 +1,15 @@
+  <h1>ACM Programming Competition Practice</h1>
+  <div>
+    <h2>For Students</h2>
+    <form action="{{get_url('problems')}}" method="get">
+      <input type="submit" value="Problems" />
+    </form>
+    <% user = get_user() 
+       if user_is_admin(user): %>
+    <h2>For Admins</h2>
+    <form action="{{get_url('create')}}" method="get">
+      <input type="submit" value="Create" />
+    </form>
+    <% end %>
+  </div>
+% rebase('assessment.base')
