@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<style>
-.correct {
-  margin-bottom: 30px;
-}
 
+<style>
 .True {
   color: green;
 }
@@ -12,19 +9,34 @@
   color: red;
 }
 
-
+p {
+  margin: 0;
+}
 </style>
+
 <% if len(data) > 0: %>
   <h1>Submissions for {{data[0]['onyen']}}: {{data[0]['name']}} </h1>
   <hr></hr>
 
 
-  <% for row in data: %>
-    <p style="font-weight: bold">Date Submitted: {{row['date']}}</p>
-    <p class="correct ">Correct: <span class="{{row['correct']}}">{{row['correct']}}</span></p>
-  <% end %>
+  <% index = 1
+    for row in data: 
+      index = index + 1 %>
+      <% if index%2 == 0: %>
+        <div style="background-color:lightgray; padding: 15px 0px 15px 10px">
+          <p style="font-weight: bold">Date Submitted: {{row['date']}}</p>
+          <p class="correct ">Correct: <span class="{{row['correct']}}">{{row['correct']}}</span></p>
+        </div>
+      <% else: %>
+        <div style="padding: 15px 0px 15px 10px"">
+          <p style="font-weight: bold">Date Submitted: {{row['date']}}</p>
+          <p class="correct ">Correct: <span class="{{row['correct']}}">{{row['correct']}}</span></p>
+        </div>
+      <% end %>
+    <% end %>
 <% else: %>
-  <h1>No Submissions</h1>
+  <h2>No submissions</h2>
 <% end %>
 
+  
 % rebase('assessment.base')

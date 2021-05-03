@@ -78,12 +78,14 @@ def syllabi(page_name, db):
    return {"base": content, "title": title, "user": user, "admin": user_is_admin(user),
            "agenda_type": 'student'}
 
+
 @app.route("/", name="root")
 @auth(user_is_known)
 @view("home")
 def home():
    """ Display home page """
    return # pylint: disable=no-value-for-parameter
+
 
 @app.get("/create", name="create")
 @auth(user_is_admin)
@@ -92,13 +94,14 @@ def create():
    """Generate a problem creation screen"""
    return
 
+
 @app.post("/create-problem")
 @auth(user_is_admin)
 @view("create")
 @with_db
 def create_problem(db):
    """Creates a new problem based off admin input"""
-   name = request.forms.get("name")
+   name = (request.forms.get("name")).replace("\r", "").replace("\n", "").replace("+", "")
    description = request.forms.get("description")
    inputDesc = request.forms.get("inputDesc")
    outputDesc = request.forms.get("outputDesc")
@@ -117,12 +120,13 @@ def create_problem(db):
 @with_db
 def all_problems(db):
    """Generates screen with list of all problems"""
-   db.execute("""select id, name from problems""")
+   db.execute("""select id, name from problems order by id asc""")
    result = db.fetchall()
    problems = []
    for id, name in result: 
       problems.append({"id": id, "name": name})
    return dict(data=problems)
+
 
 @app.get("/problem/<pid>", name="problem")
 @auth(user_is_known)
@@ -137,6 +141,7 @@ def problems(db, pid):
    for id, name, description, inputDesc, outputDesc, sampleIn, sampleOut in result: 
       problems.append({"id": id, "name": name, "description": description, "inputDesc": inputDesc, "outputDesc": outputDesc, "sampleIn": sampleIn, "sampleOut": sampleOut})
    return dict(data=problems)
+
 
 @app.post("/submit/<pid>")
 @auth(user_is_known)
@@ -190,17 +195,17 @@ def submit(db, pid):
    if os.path.exists(solution_file_path):
       os.remove(solution_file_path)
    
-   return template('Successfully Submitted {{name}} for {{user}}', name=name, user=user)
+   return template('Successfully Submitted "{{name}}" for {{user}}! You may close this tab.', name=name, user=user)
+
 
 @app.get("/submittedproblems", name="submittedproblems")
 @auth(user_is_known)
 @view("submittedproblems")
 @with_db
 def submittedProblems(db):
-   """Gets submissions from db given user"""
+   """Gets all problems from the db"""
    fb = [True]
-   """Generates screen with list of all submitted problems"""
-   db.execute("""select id, name from user_submissions where submitted = %s""", fb,)
+   db.execute("""select id, name from problems order by id asc""", fb,)
    result = db.fetchall()
    problems = []
    seen = []
@@ -208,7 +213,6 @@ def submittedProblems(db):
       if name not in seen: 
          problems.append({"id": id, "name": name})
          seen.append(name)
-
    return dict(data=problems)
 
    
@@ -217,11 +221,12 @@ def submittedProblems(db):
 @view("submissions")
 @with_db
 def submissions(db, name):
+   """Gets submissions for certain problem from db given user"""
    user = get_user()
    fb = [user, name]
    db.execute("""select id, date, onyen, name, submitted, correct from user_submissions where onyen = %s and name = %s order by date desc""", fb,)
    result = db.fetchall()
    submissions = []
-   for id, date, onyen, name, submitted, correct in result: 
+   for id, date, onyen, name, submitted, correct in result:
       submissions.append({"id": id, "date": date, "onyen": onyen, "name": name, "submitted": submitted, "correct": correct})
    return dict(data=submissions)

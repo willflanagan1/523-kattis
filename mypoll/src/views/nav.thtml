@@ -1,6 +1,16 @@
-    <nav>
-      <ul>
-        <li><a href="{{get_url('root')}}">Home</a></li>
-        <li><a href="{{get_url('submittedproblems')}}">Submissions</a></li>
-      </ul>
-    </nav>
+<style>
+  li {
+    padding: 5px
+  }
+  li:hover {
+    background-color: lightgray
+  }
+</style>
+
+<nav>
+  <ul>
+    <li><a href="{{get_url('root')}}">Home</a></li>
+    <li><a href="{{get_url('problems')}}">Problems</a></li>
+    <li><a href="{{get_url('submittedproblems')}}">Submissions</a></li>
+  </ul>
+</nav>
